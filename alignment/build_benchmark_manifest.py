@@ -3,7 +3,7 @@
 Reads vicon_alignment_diagnostics.csv, aligned_paths.csv, trajectory_check.csv, video/video_segments_all.csv and
 video/clip_durations.csv and writes benchmark_manifest.csv, all in outputs/game_vicon_aligned/reaching/. File paths in
 the manifest are relative to the repository root; aligned_mat_row is the 1-based row of outputTable in aligned_mat_path.
-A false flag has its reasons in <stream>_invalid_reason. The flags are described in alignment/video/README.md.
+A false flag has its reasons in <stream>_invalid_reason. The flags are described column by column in derivatives/vikitraj/manifest.json of the release.
 
     python alignment/build_benchmark_manifest.py
 """

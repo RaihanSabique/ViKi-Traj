@@ -1,7 +1,7 @@
 % export_vicon_trial_frames.m
 % Frame count of every VICON recording of the reaching game, written to
 % outputs/game_vicon_aligned/reaching/vicon_trial_frames.csv (file, trial, game, n_frames).
-% paper/make_tables.py reads it for the number and total length of the recordings.
+% analysis/make_tables.py reads it for the number and total length of the recordings.
 %
 %   matlab -batch "export_vicon_trial_frames"
 

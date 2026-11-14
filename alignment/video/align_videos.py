@@ -3,7 +3,7 @@
 Reads the trials (paths in the game data) from outputs/game_vicon_aligned/reaching/<pid>_reaching_paths_plain.mat and
 the visit videos from data/raw_video_data/<pid>/. Writes video_segments.csv, video_alignment_summary.csv, QA plots and
 clips/<view>/<pid>_V<visit>_T<recording>_P<path>_<hand>.mp4 to outputs/game_vicon_aligned/reaching/video/<pid>/.
-Each clip covers the movement window of its trial. Method and columns: alignment/video/README.md.
+Each clip covers the movement window of its trial.
 
     python alignment/video/align_videos.py --participant XXXXXXX115 [--no-cut]
 """

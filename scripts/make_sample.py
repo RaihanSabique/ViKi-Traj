@@ -41,7 +41,7 @@ def trial_files(root, t):
     patterns = ["dataset_description.json", "participants.json", "task-*.json", "phenotype/*.json",
                 f"{sub}/{ses}/beh/*", f"{sub}/{ses}/motion/*_{run}_*", f"sourcedata/trajectory/{sub}/{ses}/*",
                 "sourcedata/vicon/recordings.json",
-                *(f"{DERIV}/{name}" for name in ("dataset_description.json", ".bidsignore", "README.md",
+                *(f"{DERIV}/{name}" for name in ("dataset_description.json", ".bidsignore",
                                                  "manifest.json", "splits.json")),
                 f"{DERIV}/cameras/{sub}_{ses}_*", f"{DERIV}/*/task-*.json", f"{DERIV}/keypoints2d/*/task-*.json",
                 f"{DERIV}/tracks3d/{sub}/{ses}/*_{run}_tracks3d.tsv"]

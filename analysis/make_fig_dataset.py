@@ -4,7 +4,7 @@ fig/streams_moment.pdf: one test trial (--pid study ID, --row aligned_mat_row) a
 the side video, with the zero-shot Sapiens2-1B keypoints and their errors. fig/alignment.pdf: (a) the trial on the
 screen, (b) the three clocks of its visit aligned from motion, (c) the residual timing error of every valid trial.
 
-    HF_HUB_OFFLINE=1 python paper/make_fig_dataset.py [--pid XXXXXXX110 --row 14]
+    HF_HUB_OFFLINE=1 python analysis/make_fig_dataset.py [--pid XXXXXXX110 --row 14]
 """
 import argparse
 import sys
