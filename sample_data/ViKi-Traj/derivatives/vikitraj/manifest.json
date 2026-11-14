@@ -1,0 +1,156 @@
+{
+  "participant_id": {
+    "Description": "Participant label (participants.tsv)."
+  },
+  "session": {
+    "Description": "Visit.",
+    "Levels": {
+      "ses-1": "first visit",
+      "ses-2": "second visit"
+    }
+  },
+  "run": {
+    "Description": "Trial within the session in game order: run = (round - 1) * 4 + trial of the round, four trials per game round (run-01 ... run-12)."
+  },
+  "group": {
+    "Description": "Participant group.",
+    "Levels": {
+      "TD": "typically developing",
+      "UCP": "unilateral cerebral palsy"
+    }
+  },
+  "hand": {
+    "Description": "Hand that played the trial.",
+    "Levels": {
+      "left": "left hand",
+      "right": "right hand"
+    }
+  },
+  "arm_role": {
+    "Description": "Role of the playing arm.",
+    "Levels": {
+      "affected": "paretic arm (UCP) or non-dominant arm (TD)",
+      "less_affected": "the other arm"
+    }
+  },
+  "movement_time": {
+    "Description": "Duration of the movement window (first to last sample of the iPad end-effector trajectory).",
+    "Units": "s"
+  },
+  "vicon_valid": {
+    "Description": "VICON data aligned and usable: review passed (fingertip marker missing <= 10 %), the recording covers the whole movement window, the game-to-VICON offset is backed by >= 2 agreeing estimates and within 0.1 s of the consensus of its recording, and the VICON fingertip reproduces the iPad trajectory (game-trajectory test).",
+    "Levels": {
+      "true": "passes every check",
+      "false": "fails at least one check (see the reason column)"
+    }
+  },
+  "vicon_invalid_reason": {
+    "Description": "Semicolon-separated reasons why vicon_valid is false; n/a when valid."
+  },
+  "vicon_align_source": {
+    "Description": "Source of the game-to-VICON clock offset of the trial.",
+    "Levels": {
+      "manual": "the manually marked movement start: agreeing with the recording's consensus, or taken as-is for participants aligned from manual marks only (see vicon_align_err)",
+      "xcorr": "fingertip / trajectory speed cross-correlation, agreeing with the consensus",
+      "trial_consensus": "the consensus offset of the recording (own estimates missing or disagreeing)",
+      "manual_trial_median": "the median manual offset of the recording (participants aligned from manual marks only; this trial has no mark)",
+      "no_vicon_trial": "no VICON recording of this game round"
+    }
+  },
+  "vicon_align_support": {
+    "Description": "Number of offset estimates of the recording (manual marks and, unless aligned from manual marks only, cross-correlations of its four trials) that agree with the consensus; <= 1 = unverified."
+  },
+  "vicon_align_err": {
+    "Description": "Absolute difference between the trial's game-to-VICON offset and the consensus offset of its recording (the median of its manual offsets for participants aligned from manual marks only).",
+    "Units": "s"
+  },
+  "vicon_coverage": {
+    "Description": "Share of the movement window covered by the VICON recording (0-1)."
+  },
+  "trajectory_qa_failed": {
+    "Description": "Session-level game-trajectory QA (separate from the per-trial game-trajectory test of vicon_valid): the VICON fingertip, mapped to the screen leave-one-trial-out, is compared with the iPad trajectory on the session's trials that are vicon_valid and top_valid, and the session fails when the median RMSE over them exceeds 20 mm. Failed sessions are excluded from every experiment. n/a = not tested: no trial of the session is both vicon_valid and top_valid (its VICON-valid trials with a valid side view are still used).",
+    "Levels": {
+      "true": "failed (median RMSE > 20 mm)",
+      "false": "passed (median RMSE <= 20 mm)"
+    }
+  },
+  "top_valid": {
+    "Description": "Video of the top camera aligned and usable. The clip is present, the video match is unambiguous, the video covers the whole movement window, the trial's alignment error is < 0.1 s, the fitted clock drift is plausible (|slope - 1| <= 0.002) and the clip duration matches the movement window within 2 frames.",
+    "Levels": {
+      "true": "passes every check",
+      "false": "fails at least one check (see the reason column)"
+    }
+  },
+  "top_invalid_reason": {
+    "Description": "Semicolon-separated reasons why top_valid is false; n/a when valid. 'no clip': no video of the trial."
+  },
+  "top_align_err": {
+    "Description": "Absolute residual of the trial's video-to-game offset from the offset line fitted to the video.",
+    "Units": "s"
+  },
+  "top_n_frames": {
+    "Description": "Frames of the top camera clip (movement window)."
+  },
+  "top_fps": {
+    "Description": "Nominal frame rate of the top camera source video: frame k of the clip is at run time k / fps. The MP4 header may round it (29.9968 -> 30).",
+    "Units": "Hz"
+  },
+  "top_video": {
+    "Description": "Clip of the top camera, unblurred (recorded from behind and above the participant), relative to the dataset root (sourcedata/videos/); n/a when there is no clip."
+  },
+  "top_lead_black_frames": {
+    "Description": "Leading black frames of the top camera clip: the source video started after the movement start, so frames 0 to this number minus 1 have no image (labels2d and keypoints2d have no rows for them); 0 for most clips; n/a without a clip."
+  },
+  "side_valid": {
+    "Description": "Video of the side camera aligned and usable. The clip is present, the video match is unambiguous, the video covers the whole movement window, the trial's alignment error is < 0.1 s, the fitted clock drift is plausible (|slope - 1| <= 0.002) and the clip duration matches the movement window within 2 frames.",
+    "Levels": {
+      "true": "passes every check",
+      "false": "fails at least one check (see the reason column)"
+    }
+  },
+  "side_invalid_reason": {
+    "Description": "Semicolon-separated reasons why side_valid is false; n/a when valid. 'no clip': no video of the trial."
+  },
+  "side_align_err": {
+    "Description": "Absolute residual of the trial's video-to-game offset from the offset line fitted to the video.",
+    "Units": "s"
+  },
+  "side_n_frames": {
+    "Description": "Frames of the side camera clip (movement window)."
+  },
+  "side_fps": {
+    "Description": "Nominal frame rate of the side camera source video: frame k of the clip is at run time k / fps. The MP4 header may round it (29.9968 -> 30).",
+    "Units": "Hz"
+  },
+  "side_video": {
+    "Description": "Clip of the side camera, with the heads of all persons and the laptop screens blurred, relative to the dataset root (sourcedata/videos/); n/a when there is no clip."
+  },
+  "side_lead_black_frames": {
+    "Description": "Leading black frames of the side camera clip: the source video started after the movement start, so frames 0 to this number minus 1 have no image (labels2d and keypoints2d have no rows for them); 0 for most clips; n/a without a clip."
+  },
+  "benchmark_valid": {
+    "Description": "vicon_valid and at least one valid view (top or side). The paper's selection per view is vicon_valid & <view>_valid with <view>_labels present.",
+    "Levels": {
+      "true": "vicon_valid and top_valid or side_valid",
+      "false": "vicon_valid is false or neither view is valid"
+    }
+  },
+  "valid_views": {
+    "Description": "Semicolon-separated valid views (top, side); n/a when none."
+  },
+  "vicon_motion": {
+    "Description": "VICON motion.tsv of the run, relative to the dataset root; n/a when the trial has no VICON data."
+  },
+  "ipad_motion": {
+    "Description": "iPad end-effector motion.tsv of the run, relative to the dataset root."
+  },
+  "events": {
+    "Description": "events.tsv of the run, relative to the dataset root."
+  },
+  "top_labels": {
+    "Description": "2-D labels (labels2d) of the top clip, relative to the dataset root; n/a unless the clip exists, its video is calibrated (cameras/) and the trial has VICON data."
+  },
+  "side_labels": {
+    "Description": "2-D labels (labels2d) of the side clip, relative to the dataset root; n/a unless the clip exists, its video is calibrated (cameras/) and the trial has VICON data."
+  }
+}

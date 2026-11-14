@@ -1,0 +1,119 @@
+{
+  "frame": {
+    "Description": "Index of the frame in the run's released clip of this view (videos/), from 0; frame 0 is the movement start. Where the source video began after the movement start, the clip starts with black frames (manifest <view>_lead_black_frames) and the first row is the first frame with an image; frames without an image have no row. A row describes the image of its frame: where a clip's first image repeats the next one (a seek artefact of the clip cut), the two rows are equal. Keypoints exist for the clips valid in their view (manifest <view>_valid)."
+  },
+  "time": {
+    "Description": "Capture time of the frame: run time, seconds since the movement start, through the video-game clock alignment (manifest <view>_align_err).",
+    "Units": "s"
+  },
+  "left_shoulder_x": {
+    "Description": "Horizontal position of the shoulder keypoint of the person's left side from RTMW-X, as output (not cut at a score threshold), image px of the full frame, origin at the top-left corner, x to the right, y down; n/a where the model gives none.",
+    "Units": "px"
+  },
+  "left_shoulder_y": {
+    "Description": "Vertical position of the shoulder keypoint of the person's left side from RTMW-X, as output (not cut at a score threshold), image px of the full frame, origin at the top-left corner, x to the right, y down; n/a where the model gives none.",
+    "Units": "px"
+  },
+  "left_shoulder_score": {
+    "Description": "Confidence of the keypoint as given by RTMW-X (SimCC confidence, not normalised, about 0-10), not comparable across models; truncated to 4 decimals. The paper's benchmark uses a position only where score >= 0.3."
+  },
+  "left_elbow_x": {
+    "Description": "Horizontal position of the elbow keypoint of the person's left side from RTMW-X, as output (not cut at a score threshold), image px of the full frame, origin at the top-left corner, x to the right, y down; n/a where the model gives none.",
+    "Units": "px"
+  },
+  "left_elbow_y": {
+    "Description": "Vertical position of the elbow keypoint of the person's left side from RTMW-X, as output (not cut at a score threshold), image px of the full frame, origin at the top-left corner, x to the right, y down; n/a where the model gives none.",
+    "Units": "px"
+  },
+  "left_elbow_score": {
+    "Description": "Confidence of the keypoint as given by RTMW-X (SimCC confidence, not normalised, about 0-10), not comparable across models; truncated to 4 decimals. The paper's benchmark uses a position only where score >= 0.3."
+  },
+  "left_wrist_x": {
+    "Description": "Horizontal position of the wrist keypoint of the person's left side from RTMW-X, as output (not cut at a score threshold), image px of the full frame, origin at the top-left corner, x to the right, y down; n/a where the model gives none.",
+    "Units": "px"
+  },
+  "left_wrist_y": {
+    "Description": "Vertical position of the wrist keypoint of the person's left side from RTMW-X, as output (not cut at a score threshold), image px of the full frame, origin at the top-left corner, x to the right, y down; n/a where the model gives none.",
+    "Units": "px"
+  },
+  "left_wrist_score": {
+    "Description": "Confidence of the keypoint as given by RTMW-X (SimCC confidence, not normalised, about 0-10), not comparable across models; truncated to 4 decimals. The paper's benchmark uses a position only where score >= 0.3."
+  },
+  "left_hand_x": {
+    "Description": "Horizontal position of the middle-finger knuckle (MCP, under the HND marker) keypoint of the person's left side from RTMW-X, as output (not cut at a score threshold), image px of the full frame, origin at the top-left corner, x to the right, y down; n/a where the model gives none.",
+    "Units": "px"
+  },
+  "left_hand_y": {
+    "Description": "Vertical position of the middle-finger knuckle (MCP, under the HND marker) keypoint of the person's left side from RTMW-X, as output (not cut at a score threshold), image px of the full frame, origin at the top-left corner, x to the right, y down; n/a where the model gives none.",
+    "Units": "px"
+  },
+  "left_hand_score": {
+    "Description": "Confidence of the keypoint as given by RTMW-X (SimCC confidence, not normalised, about 0-10), not comparable across models; truncated to 4 decimals. The paper's benchmark uses a position only where score >= 0.3."
+  },
+  "left_fingertip_x": {
+    "Description": "Horizontal position of the index fingertip keypoint of the person's left side from RTMW-X, as output (not cut at a score threshold), image px of the full frame, origin at the top-left corner, x to the right, y down; n/a where the model gives none.",
+    "Units": "px"
+  },
+  "left_fingertip_y": {
+    "Description": "Vertical position of the index fingertip keypoint of the person's left side from RTMW-X, as output (not cut at a score threshold), image px of the full frame, origin at the top-left corner, x to the right, y down; n/a where the model gives none.",
+    "Units": "px"
+  },
+  "left_fingertip_score": {
+    "Description": "Confidence of the keypoint as given by RTMW-X (SimCC confidence, not normalised, about 0-10), not comparable across models; truncated to 4 decimals. The paper's benchmark uses a position only where score >= 0.3."
+  },
+  "right_shoulder_x": {
+    "Description": "Horizontal position of the shoulder keypoint of the person's right side from RTMW-X, as output (not cut at a score threshold), image px of the full frame, origin at the top-left corner, x to the right, y down; n/a where the model gives none.",
+    "Units": "px"
+  },
+  "right_shoulder_y": {
+    "Description": "Vertical position of the shoulder keypoint of the person's right side from RTMW-X, as output (not cut at a score threshold), image px of the full frame, origin at the top-left corner, x to the right, y down; n/a where the model gives none.",
+    "Units": "px"
+  },
+  "right_shoulder_score": {
+    "Description": "Confidence of the keypoint as given by RTMW-X (SimCC confidence, not normalised, about 0-10), not comparable across models; truncated to 4 decimals. The paper's benchmark uses a position only where score >= 0.3."
+  },
+  "right_elbow_x": {
+    "Description": "Horizontal position of the elbow keypoint of the person's right side from RTMW-X, as output (not cut at a score threshold), image px of the full frame, origin at the top-left corner, x to the right, y down; n/a where the model gives none.",
+    "Units": "px"
+  },
+  "right_elbow_y": {
+    "Description": "Vertical position of the elbow keypoint of the person's right side from RTMW-X, as output (not cut at a score threshold), image px of the full frame, origin at the top-left corner, x to the right, y down; n/a where the model gives none.",
+    "Units": "px"
+  },
+  "right_elbow_score": {
+    "Description": "Confidence of the keypoint as given by RTMW-X (SimCC confidence, not normalised, about 0-10), not comparable across models; truncated to 4 decimals. The paper's benchmark uses a position only where score >= 0.3."
+  },
+  "right_wrist_x": {
+    "Description": "Horizontal position of the wrist keypoint of the person's right side from RTMW-X, as output (not cut at a score threshold), image px of the full frame, origin at the top-left corner, x to the right, y down; n/a where the model gives none.",
+    "Units": "px"
+  },
+  "right_wrist_y": {
+    "Description": "Vertical position of the wrist keypoint of the person's right side from RTMW-X, as output (not cut at a score threshold), image px of the full frame, origin at the top-left corner, x to the right, y down; n/a where the model gives none.",
+    "Units": "px"
+  },
+  "right_wrist_score": {
+    "Description": "Confidence of the keypoint as given by RTMW-X (SimCC confidence, not normalised, about 0-10), not comparable across models; truncated to 4 decimals. The paper's benchmark uses a position only where score >= 0.3."
+  },
+  "right_hand_x": {
+    "Description": "Horizontal position of the middle-finger knuckle (MCP, under the HND marker) keypoint of the person's right side from RTMW-X, as output (not cut at a score threshold), image px of the full frame, origin at the top-left corner, x to the right, y down; n/a where the model gives none.",
+    "Units": "px"
+  },
+  "right_hand_y": {
+    "Description": "Vertical position of the middle-finger knuckle (MCP, under the HND marker) keypoint of the person's right side from RTMW-X, as output (not cut at a score threshold), image px of the full frame, origin at the top-left corner, x to the right, y down; n/a where the model gives none.",
+    "Units": "px"
+  },
+  "right_hand_score": {
+    "Description": "Confidence of the keypoint as given by RTMW-X (SimCC confidence, not normalised, about 0-10), not comparable across models; truncated to 4 decimals. The paper's benchmark uses a position only where score >= 0.3."
+  },
+  "right_fingertip_x": {
+    "Description": "Horizontal position of the index fingertip keypoint of the person's right side from RTMW-X, as output (not cut at a score threshold), image px of the full frame, origin at the top-left corner, x to the right, y down; n/a where the model gives none.",
+    "Units": "px"
+  },
+  "right_fingertip_y": {
+    "Description": "Vertical position of the index fingertip keypoint of the person's right side from RTMW-X, as output (not cut at a score threshold), image px of the full frame, origin at the top-left corner, x to the right, y down; n/a where the model gives none.",
+    "Units": "px"
+  },
+  "right_fingertip_score": {
+    "Description": "Confidence of the keypoint as given by RTMW-X (SimCC confidence, not normalised, about 0-10), not comparable across models; truncated to 4 decimals. The paper's benchmark uses a position only where score >= 0.3."
+  }
+}

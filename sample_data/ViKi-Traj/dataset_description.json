@@ -1,0 +1,20 @@
+{
+  "Name": "ViKi-Traj",
+  "BIDSVersion": "1.10.0",
+  "DatasetType": "raw",
+  "License": "ViKi-Traj review terms (see LICENSE)",
+  "Authors": [
+    "Anonymous (double-blind review)"
+  ],
+  "HowToAcknowledge": "Please cite the paper (citation withheld for double-blind review); see CITATION.cff.",
+  "EthicsApprovals": [
+    "Institutional Review Board of the authors' institution (name and protocol number withheld for double-blind review); written parental consent and child assent"
+  ],
+  "GeneratedBy": [
+    {
+      "Name": "ViKi-Traj release builders",
+      "Version": "1.0.0",
+      "Description": "Conversion of the de-identified end-effector trajectory files and gap-filled VICON recordings to Motion-BIDS"
+    }
+  ]
+}

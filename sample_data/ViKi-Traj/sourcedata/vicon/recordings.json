@@ -1,0 +1,26 @@
+{
+  "file": {
+    "Description": "C3D file, relative to the dataset root. Raw VICON marker trajectories (no gap filling), 100 Hz, mm, VICON lab frame (Z up); points ordered as the 24 released markers; gaps and markers absent from the recording are invalid points (residual -1, coordinates 0). Residuals were not exported, so every measured point carries the placeholder residual 1.0 (a positive residual marks measured data; no point is interpolated or modelled)"
+  },
+  "participant_id": {
+    "Description": "Participant (sub-NN)"
+  },
+  "session": {
+    "Description": "Session (visit): ses-1 or ses-2"
+  },
+  "acq": {
+    "Description": "Recording within the session, in recording order (rec1, rec2, ...); one round of the reaching game (4 runs) per recording"
+  },
+  "n_frames": {
+    "Description": "Number of frames in the recording (100 Hz)"
+  },
+  "runs": {
+    "Description": "Comma-separated run indices recorded (the run-NN entity of the released files)"
+  },
+  "run_start_frames": {
+    "Description": "Per run in runs: 0-based frame of the recording at the run's movement start, i.e. of sample 0 of its vicon motion file (= StartFrameInRecording of its motion.json; C3D frame number = value + 1). Negative when the recording started after the movement start; n/a when the run has no VICON samples (and no vicon motion file)"
+  },
+  "run_n_frames": {
+    "Description": "Per run in runs: length of the run's movement window in frames (= samples of its vicon motion file); sample k of the motion file is recording frame start + k. Only frames 0 to n_frames - 1 are recorded, so a window that starts before or ends after the recording is recorded only in part; n/a when the run has no VICON samples"
+  }
+}

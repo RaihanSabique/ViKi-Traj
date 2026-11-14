@@ -1,0 +1,16 @@
+{
+  "TaskName": "reaching",
+  "TaskDescription": "Reaching game: the child guides a game object with one finger along a curved path on an upright iPad, which logs the position of the object (the end-effector trajectory); a session has 3 rounds of 4 trials, and the hand usually alternates every two trials (hand column of beh.tsv).",
+  "TrackingSystemName": "VICON",
+  "Manufacturer": "Vicon",
+  "SamplingFrequency": 100,
+  "RecordingDuration": 21.69,
+  "MotionChannelCount": 72,
+  "POSChannelCount": 72,
+  "TrackedPointsCount": 24,
+  "SpatialAxes": "ALS",
+  "RotationRule": "n/a",
+  "StartFrameInRecording": 3276,
+  "Recording": "sub-03_ses-1_task-reaching_acq-rec2_vicon.c3d",
+  "MissingPercentage": 0.0
+}

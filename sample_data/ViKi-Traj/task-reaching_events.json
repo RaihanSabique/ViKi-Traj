@@ -1,0 +1,31 @@
+{
+  "onset": {
+    "Description": "Time of the event in run time: seconds since the movement start of the trial (sample 0 of the motion files); negative before the movement start.",
+    "Units": "s"
+  },
+  "duration": {
+    "Description": "Duration of the event; 0 (instantaneous events).",
+    "Units": "s"
+  },
+  "trial_type": {
+    "Description": "Event type. Touch events are copied from the trajectory file: begin and lift events are logged independently and need not pair up (several fingers, or a touch that began before the trial); the last object lift often follows trial_end.",
+    "Levels": {
+      "trial_start": "the path appears on the screen",
+      "movement_start": "first end-effector sample (the object starts to follow the finger)",
+      "object_touch_begin": "a touch begins on the object",
+      "object_touch_lift": "a touch on the object is lifted",
+      "other_touch_begin": "a touch begins elsewhere on the screen",
+      "other_touch_lift": "a touch elsewhere on the screen is lifted",
+      "movement_end": "last end-effector sample",
+      "trial_end": "end of the trial as logged by the game"
+    }
+  },
+  "x": {
+    "Description": "Touch or end-effector position: horizontal touch position on the screen; origin at the screen centre, positive to the participant's right (logged direction). n/a for trial_start and trial_end.",
+    "Units": "mm"
+  },
+  "y": {
+    "Description": "Touch or end-effector position: vertical touch position on the screen; origin at the screen centre, positive upward (logged direction). n/a for trial_start and trial_end.",
+    "Units": "mm"
+  }
+}

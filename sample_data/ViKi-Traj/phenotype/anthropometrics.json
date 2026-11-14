@@ -1,0 +1,44 @@
+{
+  "MeasurementToolMetadata": {
+    "Description": "Body height, body weight and segment lengths of both arms, measured once per participant. Height is rounded to 10 mm and weight to 1 kg to reduce the risk of re-identification (quasi-identifier); lengths are whole mm."
+  },
+  "participant_id": {
+    "Description": "Participant label (sub-01 ... sub-29)."
+  },
+  "height": {
+    "Description": "Body height, rounded to the nearest 10 mm to reduce the risk of re-identification (quasi-identifier). n/a when not recorded or outside the plausible range 800-2000 mm (data-entry error).",
+    "Units": "mm"
+  },
+  "weight": {
+    "Description": "Body weight, rounded to the nearest 1 kg to reduce the risk of re-identification (quasi-identifier).",
+    "Units": "kg"
+  },
+  "upper_arm_length_left": {
+    "Description": "Upper arm length, left arm.",
+    "Units": "mm"
+  },
+  "upper_arm_length_right": {
+    "Description": "Upper arm length, right arm.",
+    "Units": "mm"
+  },
+  "forearm_length_left": {
+    "Description": "Forearm length, left arm.",
+    "Units": "mm"
+  },
+  "forearm_length_right": {
+    "Description": "Forearm length, right arm.",
+    "Units": "mm"
+  },
+  "hand_length_left": {
+    "Description": "Hand length, left arm.",
+    "Units": "mm"
+  },
+  "hand_length_right": {
+    "Description": "Hand length, right arm.",
+    "Units": "mm"
+  },
+  "shoulder_width": {
+    "Description": "Shoulder width.",
+    "Units": "mm"
+  }
+}

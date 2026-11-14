@@ -1,0 +1,49 @@
+{
+  "time": {
+    "Description": "Run time of the sample, seconds since the movement start; every second sample of the 100 Hz VICON clock (50 Hz). Only the active arm (shoulder, elbow, wrist, fingertip) of runs with two usable cameras is tracked. Rows of the ViconTraj-MS sources (ft_*, seq_*) of non-test participants are in-sample (see keypoints2d).",
+    "Units": "s"
+  },
+  "source": {
+    "Description": "Origin of the track.",
+    "Levels": {
+      "vicon": "VICON joint proxies (joint), low-pass filtered at 6 Hz",
+      "vitpose_b": "ViTPose+-B: two-view linear triangulation (top and side cameras, cameras/) of the model's 2-D joints: positions at or above the benchmark's score threshold, spikes removed (Hampel) and low-pass filtered at 6 Hz in each view, interpolated to the VICON clock (n/a across gaps over 0.1 s); rows only for the joints the model estimates",
+      "rtmpose_wb": "RTMPose-WB: two-view linear triangulation (top and side cameras, cameras/) of the model's 2-D joints: positions at or above the benchmark's score threshold, spikes removed (Hampel) and low-pass filtered at 6 Hz in each view, interpolated to the VICON clock (n/a across gaps over 0.1 s); rows only for the joints the model estimates",
+      "rtmpose_hand": "RTMPose-m hand: two-view linear triangulation (top and side cameras, cameras/) of the model's 2-D joints: positions at or above the benchmark's score threshold, spikes removed (Hampel) and low-pass filtered at 6 Hz in each view, interpolated to the VICON clock (n/a across gaps over 0.1 s); rows only for the joints the model estimates",
+      "dwpose_l": "DWPose-L: two-view linear triangulation (top and side cameras, cameras/) of the model's 2-D joints: positions at or above the benchmark's score threshold, spikes removed (Hampel) and low-pass filtered at 6 Hz in each view, interpolated to the VICON clock (n/a across gaps over 0.1 s); rows only for the joints the model estimates",
+      "rtmw_x": "RTMW-X: two-view linear triangulation (top and side cameras, cameras/) of the model's 2-D joints: positions at or above the benchmark's score threshold, spikes removed (Hampel) and low-pass filtered at 6 Hz in each view, interpolated to the VICON clock (n/a across gaps over 0.1 s); rows only for the joints the model estimates",
+      "sapiens2_0.4b": "Sapiens2-0.4B: two-view linear triangulation (top and side cameras, cameras/) of the model's 2-D joints: positions at or above the benchmark's score threshold, spikes removed (Hampel) and low-pass filtered at 6 Hz in each view, interpolated to the VICON clock (n/a across gaps over 0.1 s); rows only for the joints the model estimates",
+      "sapiens2_1b": "Sapiens2-1B: two-view linear triangulation (top and side cameras, cameras/) of the model's 2-D joints: positions at or above the benchmark's score threshold, spikes removed (Hampel) and low-pass filtered at 6 Hz in each view, interpolated to the VICON clock (n/a across gaps over 0.1 s); rows only for the joints the model estimates",
+      "blazepose": "BlazePose+Hands: two-view linear triangulation (top and side cameras, cameras/) of the model's 2-D joints: positions at or above the benchmark's score threshold, spikes removed (Hampel) and low-pass filtered at 6 Hz in each view, interpolated to the VICON clock (n/a across gaps over 0.1 s); rows only for the joints the model estimates",
+      "ft_b_full_pooled_traj": "ViTPose+-B + ViconTraj-MS (fine-tuned): two-view linear triangulation (top and side cameras, cameras/) of the model's 2-D joints: positions at or above the benchmark's score threshold, spikes removed (Hampel) and low-pass filtered at 6 Hz in each view, interpolated to the VICON clock (n/a across gaps over 0.1 s); rows only for the joints the model estimates",
+      "ft_sapiens2_0.4b_head": "Sapiens2-0.4B + ViconTraj-MS (head fine-tuned): two-view linear triangulation (top and side cameras, cameras/) of the model's 2-D joints: positions at or above the benchmark's score threshold, spikes removed (Hampel) and low-pass filtered at 6 Hz in each view, interpolated to the VICON clock (n/a across gaps over 0.1 s); rows only for the joints the model estimates",
+      "ft_sapiens2_1b_head": "Sapiens2-1B + ViconTraj-MS (head fine-tuned): two-view linear triangulation (top and side cameras, cameras/) of the model's 2-D joints: positions at or above the benchmark's score threshold, spikes removed (Hampel) and low-pass filtered at 6 Hz in each view, interpolated to the VICON clock (n/a across gaps over 0.1 s); rows only for the joints the model estimates",
+      "seq_rtmpose_wb": "RTMPose-WB + ViconTraj-MS temporal head: two-view linear triangulation (top and side cameras, cameras/) of the model's 2-D joints: positions at or above the benchmark's score threshold, spikes removed (Hampel) and low-pass filtered at 6 Hz in each view, interpolated to the VICON clock (n/a across gaps over 0.1 s); rows only for the joints the model estimates",
+      "seq_rtmpose_hand": "RTMPose-m hand + ViconTraj-MS temporal head: two-view linear triangulation (top and side cameras, cameras/) of the model's 2-D joints: positions at or above the benchmark's score threshold, spikes removed (Hampel) and low-pass filtered at 6 Hz in each view, interpolated to the VICON clock (n/a across gaps over 0.1 s); rows only for the joints the model estimates",
+      "seq_dwpose_l": "DWPose-L + ViconTraj-MS temporal head: two-view linear triangulation (top and side cameras, cameras/) of the model's 2-D joints: positions at or above the benchmark's score threshold, spikes removed (Hampel) and low-pass filtered at 6 Hz in each view, interpolated to the VICON clock (n/a across gaps over 0.1 s); rows only for the joints the model estimates",
+      "seq_rtmw_x": "RTMW-X + ViconTraj-MS temporal head: two-view linear triangulation (top and side cameras, cameras/) of the model's 2-D joints: positions at or above the benchmark's score threshold, spikes removed (Hampel) and low-pass filtered at 6 Hz in each view, interpolated to the VICON clock (n/a across gaps over 0.1 s); rows only for the joints the model estimates",
+      "seq_blazepose": "BlazePose+Hands + ViconTraj-MS temporal head: two-view linear triangulation (top and side cameras, cameras/) of the model's 2-D joints: positions at or above the benchmark's score threshold, spikes removed (Hampel) and low-pass filtered at 6 Hz in each view, interpolated to the VICON clock (n/a across gaps over 0.1 s); rows only for the joints the model estimates"
+    }
+  },
+  "joint": {
+    "Description": "Joint of the active arm (manifest hand).",
+    "Levels": {
+      "shoulder": "shoulder; VICON proxy: SHO of the active arm",
+      "elbow": "elbow; VICON proxy: ELB of the active arm",
+      "wrist": "wrist; VICON proxy: mean of WRA and WRB of the active arm",
+      "fingertip": "fingertip; VICON proxy: FIN of the active arm"
+    }
+  },
+  "x": {
+    "Description": "Position in the VICON laboratory frame (the frame of the VICON motion files, z up); n/a where missing.",
+    "Units": "mm"
+  },
+  "y": {
+    "Description": "Position in the VICON laboratory frame (the frame of the VICON motion files, z up); n/a where missing.",
+    "Units": "mm"
+  },
+  "z": {
+    "Description": "Position in the VICON laboratory frame (the frame of the VICON motion files, z up); n/a where missing.",
+    "Units": "mm"
+  }
+}

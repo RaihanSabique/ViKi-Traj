@@ -1,0 +1,32 @@
+# Python 3.10. Versions of the environment that produced the paper.
+# c3d (dataset/) is installed separately: pip install --no-deps c3d==0.5.2 (its metadata asks for numpy<2).
+# Its frame reader fails under numpy 2: read the released C3D files with ezc3d or py-c3d >= 0.6.
+
+# PyTorch with CUDA 11.8
+--extra-index-url https://download.pytorch.org/whl/cu118
+torch==2.7.1
+torchvision==0.22.1
+
+numpy==2.2.6
+pandas==2.3.3
+scipy==1.15.3
+matplotlib==3.10.9
+opencv-contrib-python==5.0.0.93
+imageio-ffmpeg==0.6.0
+pillow==12.3.0
+pyarrow==25.0.1
+tqdm==4.70.1
+
+# pose models
+transformers==5.17.0
+onnxruntime==1.23.2
+mediapipe==1.0.1
+
+# Sapiens2 code in third_party/sapiens2
+safetensors==0.8.0
+accelerate==1.15.0
+iopath==0.1.10
+prettytable==3.18.0
+termcolor==3.3.0
+rich==15.0.0
+timm==1.0.30

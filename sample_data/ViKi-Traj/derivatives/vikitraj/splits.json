@@ -1,0 +1,50 @@
+{
+  "note": "Participant-level split used in the paper. Values are participant_id labels; folds are listed in order fold-1 ... fold-5. ViconTraj-MS trains on folds 2-5, stops early on fold 1 and is scored on the test participants. cross_visit: train on ses-1, test on ses-2 (not used in the paper).",
+  "test": [
+    "sub-01",
+    "sub-03",
+    "sub-07",
+    "sub-08",
+    "sub-18",
+    "sub-20",
+    "sub-24",
+    "sub-27"
+  ],
+  "folds": [
+    [
+      "sub-06",
+      "sub-12",
+      "sub-15",
+      "sub-23"
+    ],
+    [
+      "sub-02",
+      "sub-13",
+      "sub-17",
+      "sub-19"
+    ],
+    [
+      "sub-04",
+      "sub-05",
+      "sub-14",
+      "sub-21",
+      "sub-29"
+    ],
+    [
+      "sub-10",
+      "sub-16",
+      "sub-26",
+      "sub-28"
+    ],
+    [
+      "sub-09",
+      "sub-11",
+      "sub-22",
+      "sub-25"
+    ]
+  ],
+  "cross_visit": {
+    "train_session": "ses-1",
+    "test_session": "ses-2"
+  }
+}

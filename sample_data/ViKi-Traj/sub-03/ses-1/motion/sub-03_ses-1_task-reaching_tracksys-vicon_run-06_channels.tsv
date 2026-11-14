@@ -1,0 +1,73 @@
+name	component	type	tracked_point	units	placement
+LFHD_x	x	POS	LFHD	mm	left front of the head (headband, temple)
+LFHD_y	y	POS	LFHD	mm	left front of the head (headband, temple)
+LFHD_z	z	POS	LFHD	mm	left front of the head (headband, temple)
+RFHD_x	x	POS	RFHD	mm	right front of the head (headband, temple)
+RFHD_y	y	POS	RFHD	mm	right front of the head (headband, temple)
+RFHD_z	z	POS	RFHD	mm	right front of the head (headband, temple)
+LBHD_x	x	POS	LBHD	mm	left back of the head (headband)
+LBHD_y	y	POS	LBHD	mm	left back of the head (headband)
+LBHD_z	z	POS	LBHD	mm	left back of the head (headband)
+C7_x	x	POS	C7	mm	spinous process of the 7th cervical vertebra
+C7_y	y	POS	C7	mm	spinous process of the 7th cervical vertebra
+C7_z	z	POS	C7	mm	spinous process of the 7th cervical vertebra
+T10_x	x	POS	T10	mm	spinous process of the 10th thoracic vertebra
+T10_y	y	POS	T10	mm	spinous process of the 10th thoracic vertebra
+T10_z	z	POS	T10	mm	spinous process of the 10th thoracic vertebra
+CLAV_x	x	POS	CLAV	mm	jugular notch of the sternum
+CLAV_y	y	POS	CLAV	mm	jugular notch of the sternum
+CLAV_z	z	POS	CLAV	mm	jugular notch of the sternum
+RBAK_x	x	POS	RBAK	mm	right scapula, below the scapular spine
+RBAK_y	y	POS	RBAK	mm	right scapula, below the scapular spine
+RBAK_z	z	POS	RBAK	mm	right scapula, below the scapular spine
+LSHO_x	x	POS	LSHO	mm	left tip of the acromion
+LSHO_y	y	POS	LSHO	mm	left tip of the acromion
+LSHO_z	z	POS	LSHO	mm	left tip of the acromion
+LUPA_x	x	POS	LUPA	mm	left lateral upper arm, between shoulder and elbow
+LUPA_y	y	POS	LUPA	mm	left lateral upper arm, between shoulder and elbow
+LUPA_z	z	POS	LUPA	mm	left lateral upper arm, between shoulder and elbow
+LELB_x	x	POS	LELB	mm	left lateral humeral epicondyle
+LELB_y	y	POS	LELB	mm	left lateral humeral epicondyle
+LELB_z	z	POS	LELB	mm	left lateral humeral epicondyle
+LFRM_x	x	POS	LFRM	mm	left dorsal forearm, between elbow and wrist
+LFRM_y	y	POS	LFRM	mm	left dorsal forearm, between elbow and wrist
+LFRM_z	z	POS	LFRM	mm	left dorsal forearm, between elbow and wrist
+LWRA_x	x	POS	LWRA	mm	left radial styloid process
+LWRA_y	y	POS	LWRA	mm	left radial styloid process
+LWRA_z	z	POS	LWRA	mm	left radial styloid process
+LWRB_x	x	POS	LWRB	mm	left ulnar styloid process
+LWRB_y	y	POS	LWRB	mm	left ulnar styloid process
+LWRB_z	z	POS	LWRB	mm	left ulnar styloid process
+LHND_x	x	POS	LHND	mm	left dorsum of the hand, below the middle-finger knuckle
+LHND_y	y	POS	LHND	mm	left dorsum of the hand, below the middle-finger knuckle
+LHND_z	z	POS	LHND	mm	left dorsum of the hand, below the middle-finger knuckle
+LFIN_x	x	POS	LFIN	mm	left tip of the index finger
+LFIN_y	y	POS	LFIN	mm	left tip of the index finger
+LFIN_z	z	POS	LFIN	mm	left tip of the index finger
+RSHO_x	x	POS	RSHO	mm	right tip of the acromion
+RSHO_y	y	POS	RSHO	mm	right tip of the acromion
+RSHO_z	z	POS	RSHO	mm	right tip of the acromion
+RELB_x	x	POS	RELB	mm	right lateral humeral epicondyle
+RELB_y	y	POS	RELB	mm	right lateral humeral epicondyle
+RELB_z	z	POS	RELB	mm	right lateral humeral epicondyle
+RWRA_x	x	POS	RWRA	mm	right radial styloid process
+RWRA_y	y	POS	RWRA	mm	right radial styloid process
+RWRA_z	z	POS	RWRA	mm	right radial styloid process
+RWRB_x	x	POS	RWRB	mm	right ulnar styloid process
+RWRB_y	y	POS	RWRB	mm	right ulnar styloid process
+RWRB_z	z	POS	RWRB	mm	right ulnar styloid process
+RHND_x	x	POS	RHND	mm	right dorsum of the hand, below the middle-finger knuckle
+RHND_y	y	POS	RHND	mm	right dorsum of the hand, below the middle-finger knuckle
+RHND_z	z	POS	RHND	mm	right dorsum of the hand, below the middle-finger knuckle
+RFIN_x	x	POS	RFIN	mm	right tip of the index finger
+RFIN_y	y	POS	RFIN	mm	right tip of the index finger
+RFIN_z	z	POS	RFIN	mm	right tip of the index finger
+RBHD_x	x	POS	RBHD	mm	right back of the head (headband)
+RBHD_y	y	POS	RBHD	mm	right back of the head (headband)
+RBHD_z	z	POS	RBHD	mm	right back of the head (headband)
+RFRM_x	x	POS	RFRM	mm	right dorsal forearm, between elbow and wrist
+RFRM_y	y	POS	RFRM	mm	right dorsal forearm, between elbow and wrist
+RFRM_z	z	POS	RFRM	mm	right dorsal forearm, between elbow and wrist
+RUPA_x	x	POS	RUPA	mm	right lateral upper arm, between shoulder and elbow
+RUPA_y	y	POS	RUPA	mm	right lateral upper arm, between shoulder and elbow
+RUPA_z	z	POS	RUPA	mm	right lateral upper arm, between shoulder and elbow

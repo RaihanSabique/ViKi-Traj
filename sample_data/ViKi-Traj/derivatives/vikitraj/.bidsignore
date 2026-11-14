@@ -1,0 +1,11 @@
+manifest.tsv
+manifest.json
+splits.json
+README.md
+cameras/
+labels2d/
+keypoints2d/
+boxes/
+tracks3d/
+results/
+checkpoints/

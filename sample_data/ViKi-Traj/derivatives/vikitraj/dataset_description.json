@@ -1,0 +1,18 @@
+{
+  "Name": "ViKi-Traj derivatives",
+  "BIDSVersion": "1.10.0",
+  "DatasetType": "derivative",
+  "GeneratedBy": [
+    {
+      "Name": "ViKi-Traj alignment and benchmark pipeline",
+      "Version": "1.0.0",
+      "Description": "Trajectory-VICON-video alignment and validity (manifest), camera calibration, projected 2-D labels, model keypoints, person boxes, 3-D tracks, result tables and fine-tuned checkpoints of the ViKi-Traj benchmark."
+    }
+  ],
+  "SourceDatasets": [
+    {
+      "URL": "../../",
+      "Version": "1.0.0"
+    }
+  ]
+}

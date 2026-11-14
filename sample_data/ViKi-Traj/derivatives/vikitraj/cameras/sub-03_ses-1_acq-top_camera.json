@@ -1,0 +1,55 @@
+{
+  "View": "top",
+  "Description": "ProjectionMatrix P maps the VICON laboratory frame (mm, the frame of the VICON motion files) to image pixels of the clips of this view (x right, y down, origin top-left, full image size): [u w, v w, w]^T = P [X, Y, Z, 1]^T; no lens distortion. Calibration uses the NumValidTrials trials of the video that are vicon_valid and valid in this view, with VICON markers matched to white marker blobs. SplitFitReprojectionErrorPx: a camera fitted (DLT and robust refinement) on alternate trials (alternate frames when the video has one valid trial) and tested on the others: TrainMedian on its fitting pairs, HeldOutMedian and HeldOutP90 on the NumHeldOutPairs pairs of the other trials. ProjectionMatrix is then refitted on all NumMarkerBlobPairs pairs, so the held-out errors estimate the accuracy of the procedure, not of this matrix on unseen data. CalibrationOK = HeldOutMedian <= 8 px with NumHeldOutPairs >= 30 and at least 99 % of the video's VICON marker samples in front of the camera (MarkersInFrontShare); labels2d and tracks3d use only cameras with CalibrationOK. PixelsPerMm: median local image scale of ProjectionMatrix at the matched markers. Runs: every run (valid or not) whose clip of this view comes from the calibrated video. A session has one entry per calibrated source video.",
+  "Cameras": [
+    {
+      "Runs": [
+        "run-01",
+        "run-02",
+        "run-03",
+        "run-04",
+        "run-05",
+        "run-06",
+        "run-07",
+        "run-08",
+        "run-09",
+        "run-10",
+        "run-11",
+        "run-12"
+      ],
+      "ImageWidth": 1920,
+      "ImageHeight": 1080,
+      "ProjectionMatrix": [
+        [
+          232.43326676846775,
+          -2159.6755884095196,
+          -794.2835794082258,
+          2919001.4189418694
+        ],
+        [
+          -1534.8322817691924,
+          241.7664438518516,
+          -1318.776650140534,
+          274058.9468408578
+        ],
+        [
+          0.5692331786704378,
+          -0.15395238518736754,
+          -0.8076337359198598,
+          2074.5401777141283
+        ]
+      ],
+      "PixelsPerMm": 1.2356,
+      "CalibrationOK": true,
+      "MarkersInFrontShare": 1.0,
+      "NumValidTrials": 12,
+      "NumMarkerBlobPairs": 39054,
+      "SplitFitReprojectionErrorPx": {
+        "TrainMedian": 1.4,
+        "HeldOutMedian": 1.48,
+        "HeldOutP90": 4.73
+      },
+      "NumHeldOutPairs": 20539
+    }
+  ]
+}

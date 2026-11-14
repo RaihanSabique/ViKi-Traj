@@ -1,0 +1,34 @@
+{
+  "participant_id": {
+    "Description": "Participant label (sub-01 ... sub-29)."
+  },
+  "group": {
+    "Description": "Diagnostic group.",
+    "Levels": {
+      "TD": "typically developing",
+      "UCP": "unilateral cerebral palsy"
+    }
+  },
+  "age": {
+    "Description": "Age at participation, whole years.",
+    "Units": "year"
+  },
+  "affected_arm": {
+    "Description": "The paretic arm (UCP) or the non-dominant arm (TD).",
+    "Levels": {
+      "left": "left arm",
+      "right": "right arm"
+    }
+  },
+  "split": {
+    "Description": "Benchmark split of the participant: held-out test set or one of the five cross-validation folds of the remaining participants.",
+    "Levels": {
+      "test": "held-out test participant",
+      "fold-1": "cross-validation fold 1",
+      "fold-2": "cross-validation fold 2",
+      "fold-3": "cross-validation fold 3",
+      "fold-4": "cross-validation fold 4",
+      "fold-5": "cross-validation fold 5"
+    }
+  }
+}

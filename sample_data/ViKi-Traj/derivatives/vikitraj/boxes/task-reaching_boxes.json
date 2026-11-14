@@ -1,0 +1,25 @@
+{
+  "frame": {
+    "Description": "Index of the frame in the run's released clip of this view (videos/), from 0; frame 0 is the movement start. Where the source video began after the movement start, the clip starts with black frames (manifest <view>_lead_black_frames) and the first row is the first frame with an image; frames without an image have no row. A row describes the image of its frame: where a clip's first image repeats the next one (a seek artefact of the clip cut), the two rows are equal."
+  },
+  "time": {
+    "Description": "Capture time of the frame: run time, seconds since the movement start, through the video-game clock alignment (manifest <view>_align_err).",
+    "Units": "s"
+  },
+  "x0": {
+    "Units": "px",
+    "Description": "Left edge of the participant's person box, image px of the full frame, origin at the top-left corner, x to the right, y down."
+  },
+  "y0": {
+    "Units": "px",
+    "Description": "Top edge of the person box, image px of the full frame, origin at the top-left corner, x to the right, y down."
+  },
+  "x1": {
+    "Units": "px",
+    "Description": "Right edge of the person box, image px of the full frame, origin at the top-left corner, x to the right, y down."
+  },
+  "y1": {
+    "Units": "px",
+    "Description": "Bottom edge of the person box, image px of the full frame, origin at the top-left corner, x to the right, y down. The box is the one the benchmark used to crop the participant for every model: RT-DETR person detections (score >= 0.3), per frame the one with the highest overlap (IoU > 0.3) with a reference box of the video (an experimenter is sometimes in view), gaps linearly interpolated, then a 5-frame running median. Rows exist for the clips valid in their view."
+  }
+}

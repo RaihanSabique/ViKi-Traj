@@ -1,0 +1,26 @@
+participant_id	session	view	x0	y0	x1	y1	note
+sub-01	ses-1	side	0.00	0.66	0.25	1.00	laptop showing the top-view video
+sub-01	ses-2	side	0.02	0.66	0.37	1.00	laptop showing the top-view video
+sub-02	ses-2	side	0.00	0.68	0.22	1.00	laptop showing the top-view video
+sub-03	ses-2	side	0.00	0.82	0.11	1.00	laptop corner
+sub-04	ses-2	side	0.00	0.78	0.09	1.00	laptop corner
+sub-05	ses-1	side	0.00	0.78	0.09	1.00	laptop corner
+sub-07	ses-1	side	0.00	0.60	0.30	1.00	laptop showing the top-view video
+sub-09	ses-1	side	0.00	0.68	0.26	1.00	laptop showing the top-view video
+sub-09	ses-2	side	0.04	0.57	0.40	1.00	laptop showing the top-view video
+sub-10	ses-1	side	0.00	0.45	0.12	0.92	laptop
+sub-10	ses-1	side	0.09	0.62	0.42	1.00	laptop showing the top-view video
+sub-11	ses-1	side	0.00	0.80	0.11	1.00	laptop corner
+sub-11	ses-2	side	0.00	0.76	0.13	1.00	laptop corner
+sub-12	ses-1	side	0.00	0.53	0.31	1.00	laptop showing the top-view video
+sub-16	ses-2	side	0.00	0.88	0.11	1.00	laptop corner
+sub-17	ses-1	side	0.05	0.65	0.42	1.00	laptop showing the top-view video
+sub-18	ses-1	side	0.05	0.65	0.42	1.00	laptop showing the top-view video
+sub-21	ses-1	side	0.00	0.84	0.11	1.00	laptop corner
+sub-21	ses-2	side	0.00	0.82	0.11	1.00	laptop corner
+sub-22	ses-1	side	0.00	0.78	0.09	1.00	laptop corner
+sub-22	ses-2	side	0.00	0.60	0.24	1.00	laptop showing the top-view video
+sub-25	ses-2	side	0.00	0.68	0.22	1.00	laptop showing the top-view video
+sub-26	ses-1	side	0.00	0.63	0.25	1.00	laptop showing the top-view video
+sub-27	ses-2	side	0.00	0.68	0.24	1.00	laptop showing the top-view video
+sub-29	ses-1	side	0.00	0.83	0.07	1.00	laptop corner

@@ -1,0 +1,119 @@
+{
+  "frame": {
+    "Description": "Index of the frame in the run's released clip of this view (videos/), from 0; frame 0 is the movement start. Where the source video began after the movement start, the clip starts with black frames (manifest <view>_lead_black_frames) and the first row is the first frame with an image; frames without an image have no row. A row describes the image of its frame: where a clip's first image repeats the next one (a seek artefact of the clip cut), the two rows are equal. Keypoints exist for the clips of the test participants (splits.json) with vicon_valid and <view>_valid."
+  },
+  "time": {
+    "Description": "Capture time of the frame: run time, seconds since the movement start, through the video-game clock alignment (manifest <view>_align_err).",
+    "Units": "s"
+  },
+  "left_shoulder_x": {
+    "Description": "Horizontal position of the left shoulder VICON proxy (LSHO) as estimated by RTMW-X + ViconTraj-MS temporal head, as output (not cut at a score threshold), image px of the full frame, origin at the top-left corner, x to the right, y down; n/a where the model gives none.",
+    "Units": "px"
+  },
+  "left_shoulder_y": {
+    "Description": "Vertical position of the left shoulder VICON proxy (LSHO) as estimated by RTMW-X + ViconTraj-MS temporal head, as output (not cut at a score threshold), image px of the full frame, origin at the top-left corner, x to the right, y down; n/a where the model gives none.",
+    "Units": "px"
+  },
+  "left_shoulder_score": {
+    "Description": "n/a: the temporal head gives no confidence (the benchmark uses every position)."
+  },
+  "left_elbow_x": {
+    "Description": "Horizontal position of the left elbow VICON proxy (LELB) as estimated by RTMW-X + ViconTraj-MS temporal head, as output (not cut at a score threshold), image px of the full frame, origin at the top-left corner, x to the right, y down; n/a where the model gives none.",
+    "Units": "px"
+  },
+  "left_elbow_y": {
+    "Description": "Vertical position of the left elbow VICON proxy (LELB) as estimated by RTMW-X + ViconTraj-MS temporal head, as output (not cut at a score threshold), image px of the full frame, origin at the top-left corner, x to the right, y down; n/a where the model gives none.",
+    "Units": "px"
+  },
+  "left_elbow_score": {
+    "Description": "n/a: the temporal head gives no confidence (the benchmark uses every position)."
+  },
+  "left_wrist_x": {
+    "Description": "Horizontal position of the left wrist VICON proxy (mean of LWRA and LWRB) as estimated by RTMW-X + ViconTraj-MS temporal head, as output (not cut at a score threshold), image px of the full frame, origin at the top-left corner, x to the right, y down; n/a where the model gives none.",
+    "Units": "px"
+  },
+  "left_wrist_y": {
+    "Description": "Vertical position of the left wrist VICON proxy (mean of LWRA and LWRB) as estimated by RTMW-X + ViconTraj-MS temporal head, as output (not cut at a score threshold), image px of the full frame, origin at the top-left corner, x to the right, y down; n/a where the model gives none.",
+    "Units": "px"
+  },
+  "left_wrist_score": {
+    "Description": "n/a: the temporal head gives no confidence (the benchmark uses every position)."
+  },
+  "left_hand_x": {
+    "Description": "Horizontal position of the left hand VICON proxy (LHND) as estimated by RTMW-X + ViconTraj-MS temporal head, as output (not cut at a score threshold), image px of the full frame, origin at the top-left corner, x to the right, y down; n/a where the model gives none.",
+    "Units": "px"
+  },
+  "left_hand_y": {
+    "Description": "Vertical position of the left hand VICON proxy (LHND) as estimated by RTMW-X + ViconTraj-MS temporal head, as output (not cut at a score threshold), image px of the full frame, origin at the top-left corner, x to the right, y down; n/a where the model gives none.",
+    "Units": "px"
+  },
+  "left_hand_score": {
+    "Description": "n/a: the temporal head gives no confidence (the benchmark uses every position)."
+  },
+  "left_fingertip_x": {
+    "Description": "Horizontal position of the left fingertip VICON proxy (LFIN) as estimated by RTMW-X + ViconTraj-MS temporal head, as output (not cut at a score threshold), image px of the full frame, origin at the top-left corner, x to the right, y down; n/a where the model gives none.",
+    "Units": "px"
+  },
+  "left_fingertip_y": {
+    "Description": "Vertical position of the left fingertip VICON proxy (LFIN) as estimated by RTMW-X + ViconTraj-MS temporal head, as output (not cut at a score threshold), image px of the full frame, origin at the top-left corner, x to the right, y down; n/a where the model gives none.",
+    "Units": "px"
+  },
+  "left_fingertip_score": {
+    "Description": "n/a: the temporal head gives no confidence (the benchmark uses every position)."
+  },
+  "right_shoulder_x": {
+    "Description": "Horizontal position of the right shoulder VICON proxy (RSHO) as estimated by RTMW-X + ViconTraj-MS temporal head, as output (not cut at a score threshold), image px of the full frame, origin at the top-left corner, x to the right, y down; n/a where the model gives none.",
+    "Units": "px"
+  },
+  "right_shoulder_y": {
+    "Description": "Vertical position of the right shoulder VICON proxy (RSHO) as estimated by RTMW-X + ViconTraj-MS temporal head, as output (not cut at a score threshold), image px of the full frame, origin at the top-left corner, x to the right, y down; n/a where the model gives none.",
+    "Units": "px"
+  },
+  "right_shoulder_score": {
+    "Description": "n/a: the temporal head gives no confidence (the benchmark uses every position)."
+  },
+  "right_elbow_x": {
+    "Description": "Horizontal position of the right elbow VICON proxy (RELB) as estimated by RTMW-X + ViconTraj-MS temporal head, as output (not cut at a score threshold), image px of the full frame, origin at the top-left corner, x to the right, y down; n/a where the model gives none.",
+    "Units": "px"
+  },
+  "right_elbow_y": {
+    "Description": "Vertical position of the right elbow VICON proxy (RELB) as estimated by RTMW-X + ViconTraj-MS temporal head, as output (not cut at a score threshold), image px of the full frame, origin at the top-left corner, x to the right, y down; n/a where the model gives none.",
+    "Units": "px"
+  },
+  "right_elbow_score": {
+    "Description": "n/a: the temporal head gives no confidence (the benchmark uses every position)."
+  },
+  "right_wrist_x": {
+    "Description": "Horizontal position of the right wrist VICON proxy (mean of RWRA and RWRB) as estimated by RTMW-X + ViconTraj-MS temporal head, as output (not cut at a score threshold), image px of the full frame, origin at the top-left corner, x to the right, y down; n/a where the model gives none.",
+    "Units": "px"
+  },
+  "right_wrist_y": {
+    "Description": "Vertical position of the right wrist VICON proxy (mean of RWRA and RWRB) as estimated by RTMW-X + ViconTraj-MS temporal head, as output (not cut at a score threshold), image px of the full frame, origin at the top-left corner, x to the right, y down; n/a where the model gives none.",
+    "Units": "px"
+  },
+  "right_wrist_score": {
+    "Description": "n/a: the temporal head gives no confidence (the benchmark uses every position)."
+  },
+  "right_hand_x": {
+    "Description": "Horizontal position of the right hand VICON proxy (RHND) as estimated by RTMW-X + ViconTraj-MS temporal head, as output (not cut at a score threshold), image px of the full frame, origin at the top-left corner, x to the right, y down; n/a where the model gives none.",
+    "Units": "px"
+  },
+  "right_hand_y": {
+    "Description": "Vertical position of the right hand VICON proxy (RHND) as estimated by RTMW-X + ViconTraj-MS temporal head, as output (not cut at a score threshold), image px of the full frame, origin at the top-left corner, x to the right, y down; n/a where the model gives none.",
+    "Units": "px"
+  },
+  "right_hand_score": {
+    "Description": "n/a: the temporal head gives no confidence (the benchmark uses every position)."
+  },
+  "right_fingertip_x": {
+    "Description": "Horizontal position of the right fingertip VICON proxy (RFIN) as estimated by RTMW-X + ViconTraj-MS temporal head, as output (not cut at a score threshold), image px of the full frame, origin at the top-left corner, x to the right, y down; n/a where the model gives none.",
+    "Units": "px"
+  },
+  "right_fingertip_y": {
+    "Description": "Vertical position of the right fingertip VICON proxy (RFIN) as estimated by RTMW-X + ViconTraj-MS temporal head, as output (not cut at a score threshold), image px of the full frame, origin at the top-left corner, x to the right, y down; n/a where the model gives none.",
+    "Units": "px"
+  },
+  "right_fingertip_score": {
+    "Description": "n/a: the temporal head gives no confidence (the benchmark uses every position)."
+  }
+}

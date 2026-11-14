@@ -1,0 +1,37 @@
+# raw data, outputs, release, weights and third-party code of the working layout
+/data/
+/outputs/
+/release/
+/models/
+/third_party/
+/.venv/
+
+# Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Slurm logs; the folder itself is kept
+slurm/logs/*
+!slurm/logs/.gitkeep
+
+# arrays, weights and videos (the media of the README are kept)
+*.npz
+*.npy
+*.pt
+*.pth
+*.onnx
+*.safetensors
+*.mp4
+*.gif
+*.mov
+!docs/media/*.mp4
+!docs/media/*.gif
+
+# MATLAB autosaves, editor and system files, test caches
+*.asv
+*.swp
+.vscode/
+.idea/
+.DS_Store
+.pytest_cache/

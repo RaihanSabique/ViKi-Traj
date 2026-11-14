@@ -1,0 +1,13 @@
+run	hand	arm_role	trial_start	movement_start	movement_end	movement_time	time_to_movement	path_length	n_object_touches	n_other_touches
+run-01	left	affected	0.0000	6.2700	30.6670	24.3970	6.2700	773.32	1	1
+run-02	left	affected	37.0160	37.1540	59.7000	22.5460	0.1380	755.96	0	0
+run-03	right	less_affected	67.0830	67.2050	84.0640	16.8590	0.1220	759.31	0	0
+run-04	right	less_affected	89.0600	89.1420	105.4350	16.2930	0.0820	755.73	0	0
+run-05	left	affected	159.9920	162.6440	186.6900	24.0460	2.6520	774.44	1	0
+run-06	left	affected	194.0080	194.0350	215.7230	21.6880	0.0270	764.49	0	0
+run-07	right	less_affected	221.1220	221.2260	242.4050	21.1790	0.1040	747.64	0	0
+run-08	right	less_affected	247.5360	247.5900	266.7350	19.1450	0.0540	790.71	0	0
+run-09	left	affected	297.2040	300.2560	321.5170	21.2610	3.0520	800.95	1	0
+run-10	left	affected	326.5810	326.5940	345.5050	18.9110	0.0130	766.65	0	0
+run-11	right	less_affected	350.2930	350.4170	369.6780	19.2610	0.1240	742.52	0	0
+run-12	right	less_affected	373.4740	373.6380	390.5400	16.9020	0.1640	781.96	0	0

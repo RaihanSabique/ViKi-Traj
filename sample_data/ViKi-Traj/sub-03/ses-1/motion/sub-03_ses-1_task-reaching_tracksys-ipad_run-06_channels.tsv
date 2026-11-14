@@ -1,0 +1,4 @@
+name	component	type	tracked_point	units	placement	description
+latency	n/a	LATENCY	n/a	s	n/a	time of the sample in run time (s since the movement start)
+x	x	POS	touch	mm	iPad screen, upright in front of the participant	horizontal touch position on the screen; origin at the screen centre, positive to the participant's right (logged direction)
+y	y	POS	touch	mm	iPad screen, upright in front of the participant	vertical touch position on the screen; origin at the screen centre, positive upward (logged direction)

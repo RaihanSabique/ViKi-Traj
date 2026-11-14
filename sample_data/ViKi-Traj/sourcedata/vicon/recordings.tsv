@@ -1,0 +1,2 @@
+file	participant_id	session	acq	n_frames	runs	run_start_frames	run_n_frames
+sourcedata/vicon/sub-03/ses-1/sub-03_ses-1_task-reaching_acq-rec2_vicon.c3d	sub-03	ses-1	rec2	10822	5,6,7,8	149,3276,6001,8639	2405,2169,2118,1915
