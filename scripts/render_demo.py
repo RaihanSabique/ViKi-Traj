@@ -4,7 +4,7 @@ Reads only the released dataset. Writes demo_best_model.mp4 (Sapiens2-1B + Vicon
 with the trial's median 3D error per joint from tracks3d) and demo_all_models.mp4 (the 8 models zero-shot and with
 ViconTraj-MS on one view), each with a GIF copy.
 
-    python scripts/render_demo.py [--root release/ViKi-Traj] [--trial sub-03 ses-1 run-06] [--view side]
+    python scripts/render_demo.py [--root release/ViKi-Traj] [--trial sub-03 ses-1 run-06] [--view top]
         [--out docs/media]
 """
 import argparse
@@ -43,7 +43,7 @@ GAP, TITLE_H, LEGEND_H = 8, 34, 46
 TRAIL_S = 2.0               # fingertip trail, s: long enough to show beside the dot at the drag speed (about 35 mm/s)
 LIGHT = 0.3                 # zero-shot colour: share of white mixed into the model colour
 CRF = 20                    # x264 quality
-GIF_FPS, GIF_W, GIF_COLOURS = 10, 960, 96
+GIF_FPS, GIF_BOX, GIF_COLOURS = 10, (960, 540), 96          # GIF frame fits in GIF_BOX px
 SUB = 16                    # cv2 drawing with 4 fractional bits (sub-pixel positions)
 
 
@@ -275,7 +275,8 @@ def write_mp4(path, size, fps, frames):
 def to_gif(mp4):
     """GIF copy of an MP4: denoised in time so that the background stays still between frames (smaller file), one
     palette weighted to the moving pixels (keeps the model colours apart)."""
-    vf = (f"fps={GIF_FPS},scale={GIF_W}:-1:flags=lanczos,hqdn3d=4:4:20:20,split[a][b];"
+    vf = (f"fps={GIF_FPS},scale={GIF_BOX[0]}:{GIF_BOX[1]}:force_original_aspect_ratio=decrease:flags=lanczos,"
+          "hqdn3d=4:4:20:20,split[a][b];"
           f"[a]palettegen=max_colors={GIF_COLOURS}:stats_mode=diff[p];"
           "[b][p]paletteuse=dither=bayer:bayer_scale=5:diff_mode=rectangle")
     subprocess.run([imageio_ffmpeg.get_ffmpeg_exe(), "-y", "-loglevel", "error", "-i", str(mp4), "-vf", vf,
@@ -379,7 +380,7 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("--root", type=Path, default=ROOT / "release" / "ViKi-Traj", help="released dataset")
     ap.add_argument("--trial", nargs=3, default=["sub-03", "ses-1", "run-06"], metavar=("SUB", "SES", "RUN"))
-    ap.add_argument("--view", choices=("top", "side"), default="side", help="view of demo_all_models")
+    ap.add_argument("--view", choices=("top", "side"), default="top", help="view of demo_all_models")
     ap.add_argument("--out", type=Path, default=ROOT / "docs" / "media")
     args = ap.parse_args()
     row = trial(args.root, *args.trial)

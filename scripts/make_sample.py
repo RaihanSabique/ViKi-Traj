@@ -1,8 +1,8 @@
 """Copy one trial of the released dataset into a small tree with the same layout.
 
 Keeps the trial's rows of the participant, phenotype, recordings and manifest tables, and copies the visit's beh,
-trajectory and camera files, the C3D recording that contains the trial and the trial's motion, events and derivative
-files, with their sidecars. Video clips, checkpoints, results and the root documents are left out.
+trajectory and camera files, the C3D recording that contains the trial and the trial's motion, events, video clips and
+derivative files, with their sidecars. Checkpoints, results and the root documents are left out.
 
     python scripts/make_sample.py [--root release/ViKi-Traj] [--trial sub-03 ses-1 run-06]
         [--out sample_data/ViKi-Traj]
@@ -46,6 +46,8 @@ def trial_files(root, t):
                 f"{DERIV}/cameras/{sub}_{ses}_*", f"{DERIV}/*/task-*.json", f"{DERIV}/keypoints2d/*/task-*.json",
                 f"{DERIV}/tracks3d/{sub}/{ses}/*_{run}_tracks3d.tsv"]
     for view in ("top", "side"):
+        if t[f"{view}_video"] != "n/a":
+            patterns.append(t[f"{view}_video"])
         labels = t[f"{view}_labels"]
         if labels != "n/a":
             stem = labels[len(f"{DERIV}/labels2d/"):-len("_labels.tsv")]       # sub-XX/ses-N/<clip>

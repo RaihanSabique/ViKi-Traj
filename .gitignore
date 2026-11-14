@@ -27,6 +27,7 @@ slurm/logs/*
 *.mov
 !docs/media/*.mp4
 !docs/media/*.gif
+!sample_data/ViKi-Traj/sourcedata/videos/**/*.mp4
 
 # MATLAB autosaves, editor and system files, test caches
 *.asv

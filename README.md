@@ -22,9 +22,9 @@ joints of the active arm projected into the view; green: model keypoints, with a
 over the last 2 s. The box gives the median two-view 3D error of the trial: shoulder 4.3, elbow 2.5, wrist 3.8 and
 fingertip 4.3 mm.
 
-![The eight models zero-shot and with ViconTraj-MS on the side view](docs/media/demo_all_models.gif)
+![The eight models zero-shot and with ViconTraj-MS on the top view](docs/media/demo_all_models.gif)
 
-The eight models in the side view, with the heads blurred as in the release
+The eight models in the top view, which films the participant from behind
 ([full video](docs/media/demo_all_models.mp4)). Each model is drawn zero-shot (dashed, lighter) and with ViconTraj-MS
 (solid) in its color of the results figure below. ViconTraj-MS is fine-tuning for ViTPose+-B, pose-head training for
 the two Sapiens2 models and a temporal head for the other five. The GIFs run at 10 fps; the MP4s have all 652 frames
@@ -227,11 +227,11 @@ ipad = motion(t.ipad_motion)    # end-effector trajectory: latency (s), finger p
 labels = pd.read_csv(f"{root}/{t.top_labels}", sep="\t", na_values="n/a")  # VICON joints projected, px per frame
 kp_file = t.top_labels.replace("labels2d/", "keypoints2d/ft_sapiens2_1b_head/").replace("_labels", "_keypoints")
 keypoints = pd.read_csv(f"{root}/{kp_file}", sep="\t", na_values="n/a")  # Sapiens2-1B + ViconTraj-MS
-video = f"{root}/{t.top_video}"  # top clip of the trial (full release only)
+video = f"{root}/{t.top_video}"  # top clip of the trial
 ```
 
 ```bash
-python scripts/render_demo.py --root path/to/ViKi-Traj [--trial sub-03 ses-1 run-06] [--view side]
+python scripts/render_demo.py --root path/to/ViKi-Traj [--trial sub-03 ses-1 run-06] [--view top]
 python scripts/make_sample.py --root path/to/ViKi-Traj [--trial sub-03 ses-1 run-06] [--out sample_data/ViKi-Traj]
 python dataset/validate_release.py --root path/to/ViKi-Traj --scrub-terms /dev/null --jobs 8
 python paper/dataset_stats.py --release path/to/ViKi-Traj   # Table 2 -> outputs/paper/tables/dataset_stats.tex
@@ -241,10 +241,10 @@ python paper/dataset_stats.py --release path/to/ViKi-Traj   # Table 2 -> outputs
 (`derivatives/vikitraj/tracks3d/`, 410 trials) in about 1.5 min on a CPU, writes them to `docs/media/`, and prints the
 median 3D error per joint; the temporal-head outputs, and with them the ViconTraj-MS keypoints of five models in the
 grid, exist only for the test participants. `make_sample.py` copies one trial into the release layout, as in
-[sample_data/](sample_data/README.md), which has no video clips, checkpoints or result tables. `validate_release.py`
-checks a copy of the release for identifiers, dates and clock times, completeness, file formats and the counts of the
-paper, and prints one line per problem; `/dev/null` as term list skips only the search for private terms. On release
-v1.0 it reports 0 problems in 21,320 files.
+[sample_data/](sample_data/README.md), which holds the trial's two clips but no checkpoints or result tables.
+`validate_release.py` checks a copy of the release for identifiers, dates and clock times, completeness, file formats
+and the counts of the paper, and prints one line per problem; `/dev/null` as term list skips only the search for private
+terms. On release v1.0 it reports 0 problems in 21,320 files.
 
 `dataset_stats.py` reproduces Table 2 of the paper from the release alone (about 1 min). The other tables and figures
 are written from the internal outputs (`paper/make_results.py`, `make_tables.py`), but the numbers behind the
