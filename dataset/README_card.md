@@ -58,13 +58,12 @@ license and DOI are withheld for double-blind review. The datasheet is Section A
 | | |
 |---|---|
 | Participants | 29 (18 TD, 11 UCP), aged 5-12 years, two visits each |
-| Trials | 696 (12 per visit; in most visits the hand changes every two trials), 128 min of movement |
-| VICON | 24 markers, 100 Hz, mm; per trial: gap-filled and smoothed by the VICON software; full recordings: raw positions (C3D, gaps not filled) |
+| Trials | 696 (12 per visit; in most visits the hand changes every two trials) |
+| VICON | 24 markers, 100 Hz, mm; per trial: gap-filled and smoothed by the VICON software; full recordings: raw positions (C3D files) |
 | End-effector trajectory | finger position while it drags the game object (which follows it), on the screen in mm, about 120 Hz while dragging, with touch events |
-| Video clips | 617 top and 650 side clips, 1920x1080 at 30 Hz; side clips head-blurred, top clips unblurred (filmed from behind) |
+| Video clips | 617 top and 650 side clips, 1920x1080 at 30 Hz; side clips head-blurred, top clips unblurred (filmed from back) |
 | Labels | per frame of the 539 top and 535 side clips with VICON data and a usable camera: 10 joints and 24 markers projected into the image; visibility on every third frame of clips valid in that view |
 | Model outputs | 2D keypoints of 8 zero-shot models and 8 ViconTraj-MS variants, person boxes, two-view 3D tracks of the active arm |
-| Valid trials | VICON 556, top video 522, side video 488, all three streams 416 (72 min, 24 participants) |
 | Splits | 8 test participants (5 TD, 3 UCP), 21 development participants in 5 folds |
 
 ## Layout
