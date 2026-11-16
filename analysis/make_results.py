@@ -720,7 +720,7 @@ def fig_zs_ft(q1, q2, ang):
                     t.set_ha("right")
                     t.set_bbox(dict(facecolor="white", lw=0, pad=0.5))
         ax.set_title(title, fontsize=6.5, linespacing=1.15)
-        ax.grid(axis="y", visible=False)
+        ax.grid(False)
         ax.set_ylim(len(ZS) - 0.5, -0.75)
     axes[0].set_yticks([y_zs[v] for v in ZS])
     axes[0].set_yticklabels([FIGLAB[v] for v in ZS])
