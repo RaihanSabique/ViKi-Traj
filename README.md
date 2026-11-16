@@ -20,22 +20,7 @@ An example of comparison between zero-shot (dashed, lighter) and  ViconTraj-MS (
 
 
 ## Dataset
-This dataset contains upper-limb movements of Children aged 5-12 years, typically developing (TD) or with unilateral cerebral palsy (UCP). Participants played reaching game on an 12.9 inch iPad while a 24-marker VICON system (100 Hz), an overhead (top) and a side camera (30 Hz), and the iPad apps (end-effector trajectory, 120 Hz) record each trial without hardware
-synchronization.
-
-| | Release v1.0 |
-|---|---|
-| Participants | 29 (18 TD, 11 UCP), two visits each |
-| Trials | 696 (24 per participant), median 9.6 s, 128 min of movement |
-| VICON | 24 markers (modified Plug-in Gait upper body), 100 Hz, 759,984 samples; 173 full recordings (C3D, 189 min) |
-| End-effector trajectory | finger position on the screen, about 120 Hz, 804,462 samples; 7,315 trial and touch events |
-| Video clips | 617 top, 650 side (419,367 frames, 233 min), 30 Hz, 1920x1080 (3 of the 116 source videos 1280x720) |
-| Labels | 10 joints and 24 markers projected into each frame of 539 top and 535 side clips (357,068 frames) |
-| Model outputs | 2D keypoints of 8 zero-shot and 8 ViconTraj-MS models (12,261 files), boxes, 3D tracks of 410 trials |
-| Valid trials | VICON 556, top 522, side 488, all three streams 416 (72 min) |
-| Size | 21,320 files, 12.6 GB |
-
-
+This dataset contains upper-limb movements of Children aged 5-12 years, typically developing (TD) or with unilateral cerebral palsy (UCP). Participants played reaching game on an 12.9 inch iPad while a 24-marker VICON system (100 Hz), an overhead (top) and a side camera (30 Hz), and the iPad apps (end-effector trajectory, 120 Hz) record each trial without hardware synchronization.
 
 ![Setup and one aligned trial](docs/media/Figure-1.png)
 
@@ -55,13 +40,9 @@ Check One trial is in [sample_data/](sample_data/).
 
 Three benchmark tasks scored on 8 held-out test participants (5 TD, 3 UCP):
 
-1. 2D and 3D upper-limb pose: error of the shoulder, elbow, wrist, hand and fingertip in each view and after two-view
-   triangulation, against the VICON joints (E1, E2 in the code).
-2. Kinematic features: elbow flexion and shoulder elevation angles (RMSE, range of motion), and the peak speed, time
-   to peak speed, straightness, number of speed peaks, spectral arc length and log dimensionless jerk of the wrist and
-   the end-effector (ICC(2,1) against VICON; E4).
-3. End-effector trajectory: the fingertip estimate mapped to the screen and compared with the game trajectory (RMSE,
-   length ratio, speed correlation; E3).
+1. 2D and 3D upper-limb pose: error of the shoulder, elbow, wrist, hand and fingertip in each view and two-view triangulation, against the VICON joints (E1, E2 in the code).
+2. Kinematic features: elbow flexion and shoulder elevation angles (RMSE, range of motion), and the peak speed, time to peak speed, straightness, number of speed peaks, spectral arc length and log dimensionless jerk of the wrist and the end-effector (ICC(2,1) against VICON; E4).
+3. End-effector trajectory: the fingertip estimate mapped to the screen and compared with the game trajectory (RMSE, length ratio, speed correlation; E3).
 
 ViconTraj-MS (VICON and trajectory multi-modal supervision, E5) trains pose models on two references: the VICON joints
 projected into each view, and the game trajectory projected through a screen plane fitted per VICON recording, which
