@@ -708,8 +708,6 @@ def fig_zs_ft(q1, q2, ang):
                 lab = f" {r.v:.1f}"
                 if k == 0 and v == "vitpose_b" and key in ("fingertip", "traj"):
                     lab += "\u2021"                                                     # wrist used as the fingertip
-                if k == 1 and v in w.index and np.isfinite(w.v.get(v, np.nan)):
-                    lab += f" ({(r.v / w.v[v] - 1) * 100:+.0f}%)"
                 ax.text(r.hi, y_zs[v] + dy, lab, va="center", fontsize=5.2, color=INK)
         keep = [n for n in shown if n in w.index and not (n == "vitpose_b" and key == "fingertip")]
         xmax = np.nanmax(w.hi.reindex(keep).values) * 1.38
@@ -726,7 +724,7 @@ def fig_zs_ft(q1, q2, ang):
         ax.set_ylim(len(ZS) - 0.5, -0.75)
     axes[0].set_yticks([y_zs[v] for v in ZS])
     axes[0].set_yticklabels([FIGLAB[v] for v in ZS])
-    fig.tight_layout(w_pad=0.5, rect=(0, 0, 1, 0.955))
+    fig.tight_layout(w_pad=1.6, rect=(0, 0, 1, 0.955))
     hs = [plt.Rectangle((0, 0), 1, 1, facecolor=ZS_COL, label="Zero-shot"),
           plt.Rectangle((0, 0), 1, 1, facecolor=FT_COL, label="With ViconTraj-MS")]
     fig.legend(handles=hs, loc="upper right", ncol=2, fontsize=6, bbox_to_anchor=(axes[-1].get_position().x1, 1.0), borderaxespad=0,
