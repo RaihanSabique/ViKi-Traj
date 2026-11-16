@@ -68,12 +68,12 @@ def screen_paths(r, cams, model=FT):
 
 
 def draw_screen(ax, t, xy, paths, scale, r, video_name="video (fine-tuned)"):
-    g = xy / scale
-    ax.plot(g[:, 0], -g[:, 1], color=INK, lw=2.0, label="game trajectory", solid_capstyle="round")
-    for lab, col, name in (("Vicon", SLOT[2], "Vicon markers"), ("ft", SLOT[4], video_name)):
+    g = xy / scale                                   # game y points up (origin at the screen centre), as the child sees it
+    ax.plot(g[:, 0], g[:, 1], color=INK, lw=2.0, label="game trajectory", solid_capstyle="round")
+    for lab, col, name in (("Vicon", SLOT[2], "VICON markers"), ("ft", SLOT[4], video_name)):
         p = paths[lab] / scale
         e = np.sqrt(np.nanmean(np.sum((p - g) ** 2, 1)))
-        ax.plot(p[:, 0], -p[:, 1], color=col, lw=1.0, label=f"{name}: {e:.1f} mm")
+        ax.plot(p[:, 0], p[:, 1], color=col, lw=1.0, label=f"{name}: {e:.1f} mm")
     ax.set_aspect("equal")
     ax.set_xlabel("screen x (mm)")
     ax.set_ylabel("screen y (mm)")
@@ -129,7 +129,8 @@ def alignment_traces(pid, visit, view, win_paths):
     return tg, obj, fin, F[:, best], sel, (a, b), segs, corr[best]
 
 
-def draw_alignment(ax, tg, obj, fin, flow, sel, win, segs, r_best):
+def draw_alignment(ax, tg, obj, fin, flow, sel, win, segs, r_best, label_fs=5.5, short=False):
+    """The three speed traces on the visit clock, each with its label above it; short: shorter labels, wider spacing."""
     a, b = win
     m = (tg >= a) & (tg <= b)
     for s0, s1 in segs:
@@ -139,16 +140,21 @@ def draw_alignment(ax, tg, obj, fin, flow, sel, win, segs, r_best):
     def z(x):
         v = x[sel & ~np.isnan(x)]
         return (x - np.nanmean(v)) / (np.nanstd(v) + 1e-9)
-    ax.plot(tg[m], np.clip(z(obj), -2, 3.0)[m] + 9.2, color=INK, lw=0.7)
-    ax.plot(tg[m], np.clip(z(fin), -2, 3.0)[m] + 4.6, color=SLOT[2], lw=0.7)
-    ax.plot(tg[m], np.clip(z(flow), -2, 3.0)[m], color=SLOT[0], lw=0.7)
-    for y, col, lab in ((9.2, INK, "Game trajectory: object speed"), (4.6, SLOT[2], "Vicon: LFIN / RFIN marker speed"),
-                        (0, SLOT[0], f"Top-view video: optical flow, best grid cell (r = {r_best:.2f})")):
-        ax.text(a + 0.4, y + 2.75, lab, color=col, fontsize=5.5, va="center", ha="left",
+    off, dy = ((11.0, 5.5, 0.0), 3.6) if short else ((9.2, 4.6, 0.0), 2.75)   # trace offsets; label height above its trace
+    ax.plot(tg[m], np.clip(z(obj), -2, 3.0)[m] + off[0], color=INK, lw=0.7)
+    ax.plot(tg[m], np.clip(z(fin), -2, 3.0)[m] + off[1], color=SLOT[2], lw=0.7)
+    ax.plot(tg[m], np.clip(z(flow), -2, 3.0)[m] + off[2], color=SLOT[0], lw=0.7)
+    if short:
+        labels = ("Game: object speed", "VICON: fingertip marker speed", f"Top video: optical flow (r = {r_best:.2f})")
+    else:
+        labels = ("Game trajectory: object speed", "VICON: LFIN / RFIN marker speed",
+                  f"Top-view video: optical flow, best grid cell (r = {r_best:.2f})")
+    for y, col, lab in zip(off, (INK, SLOT[2], SLOT[0]), labels):
+        ax.text(a + 0.4, y + dy, lab, color=col, fontsize=label_fs, va="center", ha="left",
                 bbox=dict(facecolor="white", alpha=0.85, lw=0, pad=1.2))
     ax.set_yticks([])
     ax.set_xlim(a, b)
-    ax.set_ylim(-2.3, 13.0)
-    ax.set_xlabel("game clock (s into the visit); shaded: movement trials")
+    ax.set_ylim(-2.3, 15.6 if short else 13.0)
+    ax.set_xlabel("game clock (s into the visit)" if short else "game clock (s into the visit); shaded: movement trials")
     ax.grid(axis="y", visible=False)
     ax.spines["left"].set_visible(False)

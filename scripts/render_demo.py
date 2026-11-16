@@ -26,7 +26,7 @@ DERIV = "derivatives/vikitraj"
 JOINTS = ("shoulder", "elbow", "wrist", "hand", "fingertip")         # drawn as one chain in this order
 JOINTS_3D = ("shoulder", "elbow", "wrist", "fingertip")             # joints of tracks3d
 BEST = ("ft_sapiens2_1b_head", "Sapiens2-1B + ViconTraj-MS", "#008300")
-MODELS = [  # zero-shot output, name, colour (MCOL of analysis/make_results.py), ViconTraj-MS output
+MODELS = [  # zero-shot output, name, colour, ViconTraj-MS output
     ("vitpose_b", "ViTPose+-B", "#2a78d6", "ft_b_full_pooled_traj"),
     ("rtmpose_wb", "RTMPose-WB", "#eb6834", "seq_rtmpose_wb"),
     ("rtmpose_hand", "RTMPose-m hand", "#8c5a2b", "seq_rtmpose_hand"),

@@ -1,10 +1,11 @@
 """Bottom row of Figure 1 and Figure 2 (alignment) of the paper, from the benchmark outputs.
 
 fig/streams_moment.pdf: one test trial (--pid study ID, --row aligned_mat_row) at one moment in VICON 3D, the top and
-the side video, with the zero-shot Sapiens2-1B keypoints and their errors. fig/alignment.pdf: (a) the trial on the
-screen, (b) the three clocks of its visit aligned from motion, (c) the residual timing error of every valid trial.
+the side video, with the zero-shot Sapiens2-1B keypoints and their errors. fig/alignment.pdf: (a) the three clocks
+aligned from motion over one VICON recording of the same participant whose four trials are valid in every stream
+(--clock-visit, --clock-round), (b) the residual timing error of every valid trial, (c) the trial on the screen.
 
-    HF_HUB_OFFLINE=1 python analysis/make_fig_dataset.py [--pid XXXXXXX110 --row 14]
+    HF_HUB_OFFLINE=1 python analysis/make_fig_dataset.py [--pid XXXXXXX110 --row 14] [--only-alignment]
 """
 import argparse
 import sys
@@ -49,14 +50,18 @@ def camera_view(P):
 
 def residual_panel(ax, m):
     bins = np.arange(0, 105, 5)
-    for i, (col, flag, lab) in enumerate((("vicon_align_err_s", "vicon_valid", "Vicon–game"), ("top_align_err_s", "top_valid", "top video–game"),
+    for i, (col, flag, lab) in enumerate((("vicon_align_err_s", "vicon_valid", "VICON–game"), ("top_align_err_s", "top_valid", "top video–game"),
                                           ("side_align_err_s", "side_valid", "side video–game"))):
         e = np.clip(m.loc[m[flag], col].dropna() * 1000, 0, 100)
-        ax.hist(e, bins=bins, histtype="step", lw=1.3, color=SLOT[i], label=f"{lab} (median {np.median(e):.0f} ms)")
+        ax.hist(e, bins=bins, histtype="step", lw=1.3, color=SLOT[i], label=f"{lab} ({np.median(e):.0f} ms)")
     ax.set_xlabel("residual timing error of a trial (ms)")
     ax.set_ylabel("trials")
-    ax.legend(loc="upper right", handlelength=1.4)
+    ax.legend(loc="upper right", handlelength=1.4, title="median", title_fontsize=plt.rcParams["legend.fontsize"],
+              borderaxespad=0.2)
     ax.set_xlim(0, 100)
+    ax.set_ylim(0, 320)                                  # room above the bars for the legend
+    ax.set_yticks(range(0, 201, 50))
+    ax.spines["left"].set_bounds(0, 200)
 
 
 def fig_moment(r, cams, blur, moment=0.5):
@@ -102,24 +107,38 @@ def pd_round(rec):
     return [{k: (round(v, 1) if isinstance(v, float) else v) for k, v in d.items()} for d in rec]
 
 
-def fig_alignment(r, m, cams):
-    fig = plt.figure(figsize=(7.1, 2.35))
-    gs = fig.add_gridspec(1, 3, left=0.045, right=0.99, top=0.88, bottom=0.2, wspace=0.3, width_ratios=(0.9, 1.75, 1.0))
-    ax = fig.add_subplot(gs[0, 0])
-    t, xy, paths, scale = screen_paths(r, cams, MODEL)
-    draw_screen(ax, t, xy, paths, scale, r, video_name=f"video ({MODEL_LABEL[MODEL]})")
-    ax.legend(loc="upper left", bbox_to_anchor=(-0.08, -0.3), ncol=1, handlelength=1.2, labelspacing=0.2)
-    ax.set_title("a", loc="left", fontweight="bold", fontsize=8)
-    ax = fig.add_subplot(gs[0, 1])
-    trial_rows = m[(m.pid == r.pid) & (m.visit == r.visit) & (m.trial_in_visit == r.trial_in_visit)].aligned_mat_row.astype(int).tolist()
-    draw_alignment(ax, *alignment_traces(r.pid, int(r.visit), "top", trial_rows))
-    ax.set_title("b", loc="left", fontweight="bold", fontsize=8)
-    ax = fig.add_subplot(gs[0, 2])
-    residual_panel(ax, m)
-    ax.set_title("c", loc="left", fontweight="bold", fontsize=8)
-    for ext in ("pdf", "png"):
-        fig.savefig(FIG / f"alignment.{ext}", dpi=250, bbox_inches="tight")
-    plt.close(fig)
+FIG2_FONTS = {"font.size": 8, "axes.labelsize": 8, "xtick.labelsize": 7.5, "ytick.labelsize": 7.5, "legend.fontsize": 7.5}
+
+
+def fig_alignment(r, m, cams, clock_visit, clock_round):
+    """(a) the three clocks over VICON recording clock_round of visit clock_visit, (b) the residual timing error of every
+    valid trial, (c) the trial r on the screen."""
+    with plt.rc_context(FIG2_FONTS):
+        fig = plt.figure(figsize=(7.1, 2.75))
+        gs = fig.add_gridspec(1, 3, left=0.045, right=0.99, top=0.88, bottom=0.2, wspace=0.34, width_ratios=(1.6, 1.1, 0.9))
+        ax_clock = fig.add_subplot(gs[0, 0])
+        rows = m[(m.pid == r.pid) & (m.visit == clock_visit) & (m.trial_in_visit == clock_round)]
+        draw_alignment(ax_clock, *alignment_traces(r.pid, clock_visit, "top", rows.aligned_mat_row.astype(int).tolist()),
+                       label_fs=7.5, short=True)
+        ax_res = fig.add_subplot(gs[0, 1])
+        residual_panel(ax_res, m)
+        ax_scr = fig.add_subplot(gs[0, 2])
+        t, xy, paths, scale = screen_paths(r, cams, MODEL)
+        draw_screen(ax_scr, t, xy, paths, scale, r, video_name=f"video ({MODEL_LABEL[MODEL]})")
+        ax_scr.set_anchor("S")                           # plot at the bottom of its cell, legend in the space above
+        fig.canvas.draw()
+        pos = ax_scr.get_position()
+        ax_scr.legend(loc="lower left", bbox_to_anchor=(pos.x0 - 0.045, pos.y1 + 0.05), bbox_transform=fig.transFigure,
+                      ncol=1, handlelength=1.2, labelspacing=0.2, borderaxespad=0)
+        # panel letters on one line above the panels: (a) at its axes, (b) and (c) at the left edge of the panel
+        fig.canvas.draw()
+        to_fig = fig.transFigure.inverted()
+        left = lambda ax: to_fig.transform(ax.get_tightbbox(fig.canvas.get_renderer()))[0, 0]   # noqa: E731
+        for ax, lab, x in ((ax_clock, "a", ax_clock.get_position().x0), (ax_res, "b", left(ax_res)), (ax_scr, "c", left(ax_scr))):
+            fig.text(x, 0.905, lab, fontweight="bold", fontsize=9, ha="left", va="bottom")
+        for ext in ("pdf", "png"):
+            fig.savefig(FIG / f"alignment.{ext}", dpi=250, bbox_inches="tight")
+        plt.close(fig)
     print("wrote", FIG / "alignment.pdf")
 
 
@@ -129,16 +148,19 @@ def main():
     ap.add_argument("--row", type=int, default=14, help="aligned_mat_row of the trial")
     ap.add_argument("--moment", type=float, default=0.5, help="fraction of the trial for fig/streams_moment.pdf")
     ap.add_argument("--only-moment", action="store_true", help="write only fig/streams_moment.pdf")
+    ap.add_argument("--only-alignment", action="store_true", help="write only fig/alignment.pdf")
+    ap.add_argument("--clock-visit", type=int, default=2, help="visit of the VICON recording in panel (a) of fig/alignment.pdf")
+    ap.add_argument("--clock-round", type=int, default=3, help="VICON recording (round of trials) of that visit in panel (a)")
     args = ap.parse_args()
     FIG.mkdir(parents=True, exist_ok=True)
     style()
     m = manifest()
     r = m[(m.pid == args.pid) & (m.aligned_mat_row == args.row)].iloc[0]
     cams, blur = cameras(), FaceBlur()
-    fig_moment(r, cams, blur, args.moment)
-    if args.only_moment:
-        return
-    fig_alignment(r, m, cams)
+    if not args.only_alignment:
+        fig_moment(r, cams, blur, args.moment)
+    if not args.only_moment:
+        fig_alignment(r, m, cams, args.clock_visit, args.clock_round)
 
 
 if __name__ == "__main__":

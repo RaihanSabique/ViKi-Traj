@@ -29,10 +29,9 @@ DOC = ROOT / "outputs" / "paper"
 TAB, FIG = DOC / "tables", DOC / "fig"
 INK, INK2, INK3, GRID = "#0b0b0b", "#52514e", "#8a8984", "#e4e3df"
 SLOT = ["#2a78d6", "#eb6834", "#1baf7a", "#eda100", "#e87ba4", "#008300"]
-# zero-shot models, and one colour per model
+# zero-shot models; results figure: light red zero-shot, dark blue with ViconTraj-MS
 ZS = ["vitpose_b", "rtmpose_wb", "rtmpose_hand", "dwpose_l", "rtmw_x", "sapiens2_0.4b", "sapiens2_1b", "blazepose"]
-MCOL = {"vitpose_b": "#2a78d6", "rtmpose_wb": "#eb6834", "rtmpose_hand": "#8c5a2b", "dwpose_l": "#eda100", "rtmw_x": "#6250d6",
-        "sapiens2_0.4b": "#1baf7a", "sapiens2_1b": "#008300", "blazepose": "#e87ba4"}
+ZS_COL, FT_COL = "#ff7e79", "#0076ba"
 LAB = {"vitpose_b": "ViTPose+-B", "vitpose_l": "ViTPose+-L", "vitpose_h": "ViTPose+-H", "rtmpose_wb": "RTMPose-WB", "dwpose_l": "DWPose-L",
        "rtmw_x": "RTMW-X", "rtmpose_hand": "RTMPose-m hand", "sapiens2_0.4b": "Sapiens2-0.4B", "sapiens2_1b": "Sapiens2-1B",
        "blazepose": "BlazePose+Hands", "ft_b_head_top": "head, top", "ft_b_head_side": "head, side", "ft_b_head_pooled": "head, both views",
@@ -674,61 +673,64 @@ def fig_zs_ft(q1, q2, ang):
     pairs = [(v, best_with(q2, v)) for v in ZS]
     scr = {v: (None if v.startswith("vitpose") else f"{MODEL_LABEL[v]}, 2 views") for v in ZS}
     scr.update({w: MODEL_LABEL[w] + ", 2 views" for _, w in pairs if w})
-    panels = [("Fingertip 3-D (mm)", q2[q2.joint == "fingertip"].set_index("variant")[["median_mm", "median_ci_lo", "median_ci_hi"]]),
-              ("Wrist 3-D (mm)", q2[q2.joint == "wrist"].set_index("variant")[["median_mm", "median_ci_lo", "median_ci_hi"]]),
-              ("Elbow RMSE (\u00b0)", qa[qa.angle == "elbow_flexion"].set_index("source")[["rmse_deg", "rmse_ci_lo", "rmse_ci_hi"]]),
-              ("Shoulder RMSE (\u00b0)", qa[qa.angle == "shoulder_elevation"].set_index("source")[["rmse_deg", "rmse_ci_lo", "rmse_ci_hi"]]),
-              ("Screen RMSE (mm)", e3.rename(index={v: k for k, v in scr.items() if v})[["rmse_mm", "rmse_ci_lo", "rmse_ci_hi"]])]
+    # (key, title, table); the fingertip and trajectory panels score the wrist of ViTPose+-B zero-shot
+    panels = [("fingertip", "3D Fingertip\nError (mm)", q2[q2.joint == "fingertip"].set_index("variant")[["median_mm", "median_ci_lo", "median_ci_hi"]]),
+              ("wrist", "3D Wrist\nError (mm)", q2[q2.joint == "wrist"].set_index("variant")[["median_mm", "median_ci_lo", "median_ci_hi"]]),
+              ("elbow", "Elbow Flexion\nRMSE (\u00b0)", qa[qa.angle == "elbow_flexion"].set_index("source")[["rmse_deg", "rmse_ci_lo", "rmse_ci_hi"]]),
+              ("shoulder", "Shoulder Elevation\nRMSE (\u00b0)", qa[qa.angle == "shoulder_elevation"].set_index("source")[["rmse_deg", "rmse_ci_lo", "rmse_ci_hi"]]),
+              ("traj", "End-effector Traj.\nRMSE (mm)", e3.rename(index={v: k for k, v in scr.items() if v})[["rmse_mm", "rmse_ci_lo", "rmse_ci_hi"]])]
     shown = [n for pr in pairs for n in pr if n]
     wf = wrist_as_fingertip("vitpose_b")
-    panels[0][1].loc["vitpose_b"] = wf[:3]                                       # wrist as the fingertip, marked
-    panels[4][1].loc["vitpose_b"] = e3.loc["ViTPose+-B wrist, 2 views"][["rmse_mm", "rmse_ci_lo", "rmse_ci_hi"]].values
+    panels[0][2].loc["vitpose_b"] = wf[:3]                                       # wrist as the fingertip, marked
+    panels[4][2].loc["vitpose_b"] = e3.loc["ViTPose+-B wrist, 2 views"][["rmse_mm", "rmse_ci_lo", "rmse_ci_hi"]].values
     macro("zsVitWristAsTipThreeD", f1(wf[0]))
     macro("zsVitWristAsTipCiLo", f1(wf[1]))
     macro("zsVitWristAsTipCiHi", f1(wf[2]))
-    fig, axes = plt.subplots(1, 5, figsize=(7.0, 3.6), sharey=True)
+    fig, axes = plt.subplots(1, 5, figsize=(7.0, 3.65), sharey=True)
     y_zs = {v: 1.0 * i for i, v in enumerate(ZS)}
     vicon_screen = e3.loc["Vicon FIN"]
-    for ax, (title, w) in zip(axes, panels):
+    for ax, (key, title, w) in zip(axes, panels):
         w = w.copy()
         w.columns = ["v", "lo", "hi"]
-        if title.startswith("Screen"):
+        if key == "traj":
             ax.axvline(vicon_screen.rmse_mm, color=INK2, lw=0.8, ls=(0, (3, 2)), zorder=0)
-            ax.text(vicon_screen.rmse_mm, -0.62, f" Vicon {vicon_screen.rmse_mm:.1f}", fontsize=5.5, color=INK2, va="bottom", ha="left")
+            ax.text(vicon_screen.rmse_mm, -0.62, f" VICON {vicon_screen.rmse_mm:.1f}", fontsize=5.5, color=INK2, va="bottom", ha="left")
         for v, b in pairs:
-            for k, (name, dy, alpha, hatch) in enumerate(((v, -0.19, 1.0, None), (b, 0.19, 0.55, "////"))):
+            for k, (name, dy, col) in enumerate(((v, -0.19, ZS_COL), (b, 0.19, FT_COL))):
                 if name is None or name not in w.index or not np.isfinite(w.v.get(name, np.nan)):
-                    if k == 0 and name in w.index or (k == 0 and name not in w.index):
+                    if k == 0:
                         ax.text(0, y_zs[v] + dy, " n/a", va="center", fontsize=5, color=INK3)
                     continue
                 r = w.loc[name]
-                ax.barh(y_zs[v] + dy, r.v, height=0.36, color=MCOL[v], alpha=alpha, hatch=hatch, edgecolor="white", linewidth=0.5)
-                ax.errorbar(r.v, y_zs[v] + dy, xerr=[[r.v - r.lo], [r.hi - r.v]], fmt="none", ecolor=INK2, elinewidth=0.6)
+                ax.barh(y_zs[v] + dy, r.v, height=0.36, color=col, edgecolor="white", linewidth=0.5)
+                for ec, lw in (("white", 1.5), (INK2, 0.6)):                       # white edge: the whisker shows on both colours
+                    ax.errorbar(r.v, y_zs[v] + dy, xerr=[[r.v - r.lo], [r.hi - r.v]], fmt="none", ecolor=ec, elinewidth=lw)
                 lab = f" {r.v:.1f}"
-                if k == 0 and v == "vitpose_b" and title.split()[0] in ("Fingertip", "Screen"):
+                if k == 0 and v == "vitpose_b" and key in ("fingertip", "traj"):
                     lab += "\u2021"                                                     # wrist used as the fingertip
                 if k == 1 and v in w.index and np.isfinite(w.v.get(v, np.nan)):
                     lab += f" ({(r.v / w.v[v] - 1) * 100:+.0f}%)"
                 ax.text(r.hi, y_zs[v] + dy, lab, va="center", fontsize=5.2, color=INK)
-        keep = [n for n in shown if n in w.index and not (n == "vitpose_b" and title.startswith("Fingertip"))]
+        keep = [n for n in shown if n in w.index and not (n == "vitpose_b" and key == "fingertip")]
         xmax = np.nanmax(w.hi.reindex(keep).values) * 1.38
         ax.set_xlim(0, xmax)
         # the wrist-as-fingertip bar runs off the axis
-        if title.startswith("Fingertip") and "vitpose_b" in w.index:
+        if key == "fingertip" and "vitpose_b" in w.index:
             for t in ax.texts:
                 if t.get_text().endswith("\u2021") and t.get_position()[1] == y_zs["vitpose_b"] - 0.19:
                     t.set_x(xmax * 0.98)
                     t.set_ha("right")
                     t.set_bbox(dict(facecolor="white", lw=0, pad=0.5))
-        ax.set_title(title, fontsize=6.5)
+        ax.set_title(title, fontsize=6.5, linespacing=1.15)
         ax.grid(axis="y", visible=False)
         ax.set_ylim(len(ZS) - 0.5, -0.75)
     axes[0].set_yticks([y_zs[v] for v in ZS])
     axes[0].set_yticklabels([FIGLAB[v] for v in ZS])
-    hs = [plt.Rectangle((0, 0), 1, 1, facecolor=INK3, label="Zero-shot"),
-          plt.Rectangle((0, 0), 1, 1, facecolor=INK3, alpha=0.55, hatch="////", edgecolor="white", label="With ViconTraj-MS")]
-    fig.legend(handles=hs, loc="lower center", ncol=2, fontsize=6, bbox_to_anchor=(0.55, -0.01))
-    fig.tight_layout(w_pad=0.5, rect=(0, 0.03, 1, 1))
+    fig.tight_layout(w_pad=0.5, rect=(0, 0, 1, 0.955))
+    hs = [plt.Rectangle((0, 0), 1, 1, facecolor=ZS_COL, label="Zero-shot"),
+          plt.Rectangle((0, 0), 1, 1, facecolor=FT_COL, label="With ViconTraj-MS")]
+    fig.legend(handles=hs, loc="upper right", ncol=2, fontsize=6, bbox_to_anchor=(axes[-1].get_position().x1, 1.0), borderaxespad=0,
+               handlelength=1.4, columnspacing=1.2)                              # top right, flush with the last panel
     save(fig, "results_zs_ft")
 
 
