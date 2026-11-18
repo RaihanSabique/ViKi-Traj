@@ -1,4 +1,4 @@
-"""ViconTraj-MS temporal head (seq2d) and two-view lifting network (lift3d) on the keypoints of a pose model.
+"""ViTMS temporal head (seq2d) and two-view lifting network (lift3d) on the keypoints of a pose model.
 
 Both train a residual TCN that adds a correction to its input (folds 2-5 train, fold 1 selects the epoch). seq2d
 corrects the 2D keypoints of each view and writes the test clips as the model seq_<base>; lift3d corrects the

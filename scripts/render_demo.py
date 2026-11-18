@@ -1,8 +1,8 @@
 """Demo videos of one trial: projected VICON joints and model keypoints over the released clips.
 
-Reads only the released dataset. Writes demo_best_model.mp4 (Sapiens2-1B + ViconTraj-MS on the top and side views,
+Reads only the released dataset. Writes demo_best_model.mp4 (Sapiens2-1B + ViTMS on the top and side views,
 with the trial's median 3D error per joint from tracks3d) and demo_all_models.mp4 (the 8 models zero-shot and with
-ViconTraj-MS on one view), each with a GIF copy.
+ViTMS on one view), each with a GIF copy.
 
     python scripts/render_demo.py [--root release/ViKi-Traj] [--trial sub-03 ses-1 run-06] [--view top]
         [--out docs/media]
@@ -25,8 +25,8 @@ ROOT = Path(__file__).resolve().parents[1]
 DERIV = "derivatives/vikitraj"
 JOINTS = ("shoulder", "elbow", "wrist", "hand", "fingertip")         # drawn as one chain in this order
 JOINTS_3D = ("shoulder", "elbow", "wrist", "fingertip")             # joints of tracks3d
-BEST = ("ft_sapiens2_1b_head", "Sapiens2-1B + ViconTraj-MS", "#008300")
-MODELS = [  # zero-shot output, name, colour, ViconTraj-MS output
+BEST = ("ft_sapiens2_1b_head", "Sapiens2-1B + ViTMS", "#008300")
+MODELS = [  # zero-shot output, name, colour, ViTMS output
     ("vitpose_b", "ViTPose+-B", "#2a78d6", "ft_b_full_pooled_traj"),
     ("rtmpose_wb", "RTMPose-WB", "#eb6834", "seq_rtmpose_wb"),
     ("rtmpose_hand", "RTMPose-m hand", "#8c5a2b", "seq_rtmpose_hand"),
@@ -331,7 +331,7 @@ def render_best(root, row, out):
 
 
 def render_all(root, row, view, out):
-    """demo_all_models.mp4: the 8 models zero-shot and with ViconTraj-MS on one view, 2 x 4 tiles."""
+    """demo_all_models.mp4: the 8 models zero-shot and with ViTMS on one view, 2 x 4 tiles."""
     n, fps = int(row[f"{view}_n_frames"]), float(row[f"{view}_fps"])
     lab = frame_table(root, row[f"{view}_labels"], n)
     video = root / row[f"{view}_video"]
@@ -355,7 +355,7 @@ def render_all(root, row, view, out):
     background = np.array(pil)
     legend(background, [(("ring", None), "VICON joints projected into the view"),
                         (("dashed", rgb("#52514e", LIGHT)), "zero-shot"),
-                        (("solid", INK2), "with ViconTraj-MS")])
+                        (("solid", INK2), "with ViTMS")])
     trial_id = f"{row.participant_id} {row.session} {row.run}, {view} view"
 
     def frames():

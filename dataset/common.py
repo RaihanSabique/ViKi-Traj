@@ -55,10 +55,10 @@ WITH_METHOD = ["ft_b_full_pooled_traj", "ft_sapiens2_0.4b_head", "ft_sapiens2_1b
                "seq_rtmpose_wb", "seq_rtmpose_hand", "seq_dwpose_l", "seq_rtmw_x", "seq_blazepose"]
 MODEL_NAMES = {"vitpose_b": "ViTPose+-B", "rtmpose_wb": "RTMPose-WB", "rtmpose_hand": "RTMPose-m hand",
                "dwpose_l": "DWPose-L", "rtmw_x": "RTMW-X", "sapiens2_0.4b": "Sapiens2-0.4B", "sapiens2_1b": "Sapiens2-1B",
-               "blazepose": "BlazePose+Hands", "ft_b_full_pooled_traj": "ViTPose+-B + ViconTraj-MS (fine-tuned)",
-               "ft_sapiens2_0.4b_head": "Sapiens2-0.4B + ViconTraj-MS (head fine-tuned)",
-               "ft_sapiens2_1b_head": "Sapiens2-1B + ViconTraj-MS (head fine-tuned)"}
-MODEL_NAMES.update({f"seq_{m}": f"{MODEL_NAMES[m]} + ViconTraj-MS temporal head"
+               "blazepose": "BlazePose+Hands", "ft_b_full_pooled_traj": "ViTPose+-B + ViTMS (fine-tuned)",
+               "ft_sapiens2_0.4b_head": "Sapiens2-0.4B + ViTMS (head fine-tuned)",
+               "ft_sapiens2_1b_head": "Sapiens2-1B + ViTMS (head fine-tuned)"}
+MODEL_NAMES.update({f"seq_{m}": f"{MODEL_NAMES[m]} + ViTMS temporal head"
                     for m in ("rtmpose_wb", "rtmpose_hand", "dwpose_l", "rtmw_x", "blazepose")})
 
 

@@ -1,5 +1,5 @@
 {
-  "note": "Participant-level split used in the paper. Values are participant_id labels; folds are listed in order fold-1 ... fold-5. ViconTraj-MS trains on folds 2-5, stops early on fold 1 and is scored on the test participants. cross_visit: train on ses-1, test on ses-2 (not used in the paper).",
+  "note": "Participant-level split used in the paper. Values are participant_id labels; folds are listed in order fold-1 ... fold-5. ViTMS trains on folds 2-5, stops early on fold 1 and is scored on the test participants. cross_visit: train on ses-1, test on ses-2 (not used in the paper).",
   "test": [
     "sub-01",
     "sub-03",

@@ -438,7 +438,7 @@ def tracks_sidecar():
                           "where missing.", "Units": "mm"}
     return {"time": {"Description": "Run time of the sample, seconds since the movement start; every second sample "
                                     "of the 100 Hz VICON clock (50 Hz). Only the active arm (shoulder, elbow, wrist, "
-                                    "fingertip) of runs with two usable cameras is tracked. Rows of the ViconTraj-MS "
+                                    "fingertip) of runs with two usable cameras is tracked. Rows of the ViTMS "
                                     "sources (ft_*, seq_*) of non-test participants are not held out (see "
                                     "keypoints2d).",
                      "Units": "s"},

@@ -1,4 +1,4 @@
-"""ViconTraj-MS fine-tuning of ViTPose+-B on the joint set: projected VICON marker labels and the trajectory label.
+"""ViTMS fine-tuning of ViTPose+-B on the joint set: projected VICON marker labels and the trajectory label.
 
 Trains on the label files of labels.py and labels_traj.py of folds 2-5 of splits.json (--n-train: a subset stratified
 by TD / UCP) and keeps the epoch with the lowest median validation error on fold 1; the test participants are never

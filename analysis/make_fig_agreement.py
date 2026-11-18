@@ -2,9 +2,9 @@
 
 For every test trial valid in all three streams (trajectory check passed), the fingertip peak speed of the kinematic
 features (benchmark/e4_kinematics.py, results/E4_kin_paths.csv) from video is compared with VICON: Sapiens2-1B
-zero-shot and with ViconTraj-MS (ViTMS in the paper), with the bias (mean difference) and the 95 % limits of agreement
+zero-shot and with ViTMS, with the bias (mean difference) and the 95 % limits of agreement
 (bias +- 1.96 SD) over all trials. Differences above 1300 mm/s are drawn as triangles at the top edge. The agreement
-of ViTPose+-B with ViconTraj-MS, quoted in the text, is computed too (zero-shot ViTPose+-B has no fingertip keypoint).
+of ViTPose+-B with ViTMS, quoted in the text, is computed too (zero-shot ViTPose+-B has no fingertip keypoint).
 
 Reads outputs/benchmark. Writes outputs/paper/fig/bland_altman.{pdf,png}, one column wide, and
 outputs/paper/tables/bland_altman.csv.
@@ -58,7 +58,7 @@ def main():
     style()
     _, q2 = R.zero_shot()
     trials = test_trials(manifest())
-    ft = {v: R.best_with(q2, v) for v in (SHOWN, ALSO)}                  # the ViconTraj-MS variant of each model
+    ft = {v: R.best_with(q2, v) for v in (SHOWN, ALSO)}                  # the ViTMS variant of each model
     pairs = {s: paired(trials, s) for s in (SHOWN, ft[SHOWN], ft[ALSO])}
     rows = []
     for s, j in pairs.items():

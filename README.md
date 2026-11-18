@@ -9,14 +9,14 @@ Codebase and sample data of the ViKi-Traj multimodal dataset and bechnmark (anon
 
 ## Demo
 
-An example of a test participant trial sub-03, visit 1, trial 6 (typically developing, left arm, 21.7 s). Precise UL kinematics tracking from top and side view video using Sapiens2-1B + ViconTraj-MS. ([full video](docs/media/demo_best_model.mp4))
+An example of a test participant trial sub-03, visit 1, trial 6 (typically developing, left arm, 21.7 s). Precise UL kinematics tracking from top and side view video using Sapiens2-1B + ViTMS. ([full video](docs/media/demo_best_model.mp4))
 
-![Sapiens2-1B + ViconTraj-MS on the top and side views](docs/media/demo_best_model.gif)
+![Sapiens2-1B + ViTMS on the top and side views](docs/media/demo_best_model.gif)
 
-An example of comparison between zero-shot (dashed, lighter) and  ViconTraj-MS (solid) on all Eight baseline model that estimates UL kinematics just from a top view video
+An example of comparison between zero-shot (dashed, lighter) and  ViTMS (solid) on all Eight baseline model that estimates UL kinematics just from a top view video
 ([full video](docs/media/demo_all_models.mp4))
 
-![The eight models zero-shot and with ViconTraj-MS on the top view](docs/media/demo_all_models.gif)
+![The eight models zero-shot and with ViTMS on the top view](docs/media/demo_all_models.gif)
 
 
 ## Dataset
@@ -26,7 +26,7 @@ This dataset contains upper-limb movements of Children aged 5-12 years, typicall
 
 
 Datset layout is BIDS with the Motion-BIDS extension: one trial is one run, `ses-1` and `ses-2` are the two visits, and
-`derivatives/vikitraj/` holds the manifest, splits, cameras, labels, model outputs, result tables and ViconTraj-MS
+`derivatives/vikitraj/` holds the manifest, splits, cameras, labels, model outputs, result tables and ViTMS
 checkpoints. The dataset card, [dataset/README_card.md](dataset/README_card.md), describes the files and conventions.
 The dataset will be released for research through a gated Hugging Face repository with a DOI at publication;
 Check One trial is in [sample_data/](sample_data/).
@@ -36,7 +36,7 @@ Check One trial is in [sample_data/](sample_data/).
 
 ## Benchmark
 
-![Eight models zero-shot and with ViconTraj-MS](docs/media/results_zs_ft.png)
+![Eight models zero-shot and with ViTMS](docs/media/results_zs_ft.png)
 
 Three benchmark tasks scored on 8 held-out test participants (5 TD, 3 UCP):
 
@@ -44,11 +44,11 @@ Three benchmark tasks scored on 8 held-out test participants (5 TD, 3 UCP):
 2. Kinematic features: elbow flexion and shoulder elevation angles (RMSE, range of motion), and the peak speed, time to peak speed, straightness, number of speed peaks, spectral arc length and log dimensionless jerk of the wrist and the end-effector (ICC(2,1) against VICON; E4).
 3. End-effector trajectory: the fingertip estimate mapped to the screen and compared with the game trajectory (RMSE, length ratio, speed correlation; E3).
 
-ViconTraj-MS (VICON and trajectory multi-modal supervision, E5) trains pose models on two references: the VICON joints
+ViTMS (VICON and trajectory multi-modal supervision, E5) trains pose models on two references: the VICON joints
 projected into each view, and the game trajectory projected through a screen plane fitted per VICON recording, which
 labels the fingertip in every frame, also where its marker is hidden. ViTPose+-B is fine-tuned end to end, the pose
 heads of Sapiens2-0.4B and Sapiens2-1B are trained on the frozen backbone, and the other five models, released as
-inference graphs that cannot be trained, get a temporal head that corrects their keypoints. With ViconTraj-MS, the 3D
+inference graphs that cannot be trained, get a temporal head that corrects their keypoints. With ViTMS, the 3D
 fingertip error of Sapiens2-1B falls from 22.5 to 9.6 mm, and fine-tuned ViTPose+-B has the lowest 3D wrist error,
 7.1 mm against 14.1 mm for the best zero-shot model. ViTPose+-B reaches an RMSE of 4.8 deg for elbow flexion and
 5.2 deg for shoulder elevation (12.6 and 7.5 deg for the best zero-shot models), and the ICC of the end-effector peak

@@ -1,5 +1,5 @@
 #!/bin/bash
-# ViconTraj-MS fine-tuning run: RUN=<name> ARGS="--views top,side --mode full ..." sbatch slurm/bench_finetune.sbatch
+# ViTMS fine-tuning run: RUN=<name> ARGS="--views top,side --mode full ..." sbatch slurm/bench_finetune.sbatch
 #SBATCH --job-name=bench-ft
 #SBATCH --gres=gpu:1
 #SBATCH --cpus-per-task=8

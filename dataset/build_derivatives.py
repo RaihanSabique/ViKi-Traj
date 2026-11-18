@@ -77,7 +77,7 @@ ARM_ROLE_TABLES = ("E4_kin_paths", "E6f_selection_paths")   # their `limb` is th
 MIN_IN_FRONT = 0.99         # build_frame_tables.MIN_IN_FRONT: share of the marker samples in front of a usable camera
 
 SPLITS_NOTE = ("Participant-level split used in the paper. Values are participant_id labels; folds are listed in order fold-1 ... "
-               "fold-5. ViconTraj-MS trains on folds 2-5, stops early on fold 1 and is scored on the test "
+               "fold-5. ViTMS trains on folds 2-5, stops early on fold 1 and is scored on the test "
                "participants. cross_visit: train on ses-1, test on ses-2 (not used in the paper).")
 
 SEQ_ARCHITECTURE = {
@@ -433,7 +433,7 @@ A BIDS derivative dataset by its `dataset_description.json` only: the tables bel
 - `boxes/`: per clip frame, the person box the benchmark used to crop the participant.
 - `tracks3d/`: two-view 3D tracks of the active arm (VICON and models), mm, lab frame.
 - `results/`: the paper's result tables (`results/README.md` defines the columns).
-- `checkpoints/`: the ViconTraj-MS fine-tuned weights with their configs (`checkpoints/README.md`).
+- `checkpoints/`: the ViTMS fine-tuned weights with their configs (`checkpoints/README.md`).
 
 The video clips are in `../../sourcedata/videos/`.
 """
@@ -551,7 +551,7 @@ def results_readme():
               "- `participant_id`, `session`, `run`, `group`, `hand`, `arm_role`, `movement_time`: as in "
               "manifest.tsv.",
               "- `split`: `test` (the 8 test participants of splits.json) or `all`; `group` in summaries also `all`. "
-              "For the ViconTraj-MS variants (`ft_*`, `seq_*` and their ablations) `all` includes the participants of "
+              "For the ViTMS variants (`ft_*`, `seq_*` and their ablations) `all` includes the participants of "
               "the training folds 2-5 and the early-stopping fold 1, whose outputs are not held out; use `test`.",
               "- `view`: `top`, `side` (2D) or `3d` (two-view triangulation).",
               "- `role`: whether the evaluated arm played the trial (`active`) or not (`resting`).",
@@ -566,7 +566,7 @@ def results_readme():
               "map); `Vicon FIN` is the VICON fingertip marker, and `wrist` marks the ViTPose+ zero-shot models, "
               "which have no fingertip keypoint.", "",
               f"- With keypoints2d/: the zero-shot baselines {released}.",
-              f"- With keypoints2d/ and checkpoints/: the ViconTraj-MS models of the paper, {method}.",
+              f"- With keypoints2d/ and checkpoints/: the ViTMS models of the paper, {method}.",
               "- Ablations, in the result tables only (no keypoints, no weights):"]
     lines += ["  - " + ", ".join(f"`{i}`" for i in ids) + f": {desc}." for ids, desc in ABLATIONS]
     return "\n".join(lines) + "\n"
@@ -591,7 +591,7 @@ def write_results(root):
 
 # ----------------------------------------------------------------------------- checkpoints
 def checkpoint_sources(run):
-    """{released file name: source file} of one ViconTraj-MS model; {} when its weights are missing."""
+    """{released file name: source file} of one ViTMS model; {} when its weights are missing."""
     if run.startswith("seq_"):
         files = {}
         for v in CAMERA_VIEWS:
@@ -647,7 +647,7 @@ def checkpoint_config(run, files):
 
 
 def checkpoints_readme(runs):
-    lines = ["# ViconTraj-MS checkpoints", "",
+    lines = ["# ViTMS checkpoints", "",
              "Fine-tuned weights of the models scored in the paper (PyTorch state dicts, `torch.load(f, "
              "map_location='cpu')`), trained on folds 2-5 of splits.json with fold 1 for early stopping; the test "
              "participants were never seen. Each folder has the weights, the training log and `config.json`:", "",

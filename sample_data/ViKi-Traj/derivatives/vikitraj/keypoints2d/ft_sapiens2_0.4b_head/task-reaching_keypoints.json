@@ -7,113 +7,113 @@
     "Units": "s"
   },
   "left_shoulder_x": {
-    "Description": "Horizontal position of the left shoulder VICON proxy (LSHO) as estimated by Sapiens2-0.4B + ViconTraj-MS (head fine-tuned), as output (not cut at a score threshold), image px of the full frame, origin at the top-left corner, x to the right, y down; n/a where the model gives none.",
+    "Description": "Horizontal position of the left shoulder VICON proxy (LSHO) as estimated by Sapiens2-0.4B + ViTMS (head fine-tuned), as output (not cut at a score threshold), image px of the full frame, origin at the top-left corner, x to the right, y down; n/a where the model gives none.",
     "Units": "px"
   },
   "left_shoulder_y": {
-    "Description": "Vertical position of the left shoulder VICON proxy (LSHO) as estimated by Sapiens2-0.4B + ViconTraj-MS (head fine-tuned), as output (not cut at a score threshold), image px of the full frame, origin at the top-left corner, x to the right, y down; n/a where the model gives none.",
+    "Description": "Vertical position of the left shoulder VICON proxy (LSHO) as estimated by Sapiens2-0.4B + ViTMS (head fine-tuned), as output (not cut at a score threshold), image px of the full frame, origin at the top-left corner, x to the right, y down; n/a where the model gives none.",
     "Units": "px"
   },
   "left_shoulder_score": {
-    "Description": "Confidence of the keypoint as given by Sapiens2-0.4B + ViconTraj-MS (head fine-tuned) (heatmap maximum of the fine-tuned head, about 0-1.5), not comparable across models; truncated to 4 decimals. The paper's benchmark uses a position only where score >= 0.3."
+    "Description": "Confidence of the keypoint as given by Sapiens2-0.4B + ViTMS (head fine-tuned) (heatmap maximum of the fine-tuned head, about 0-1.5), not comparable across models; truncated to 4 decimals. The paper's benchmark uses a position only where score >= 0.3."
   },
   "left_elbow_x": {
-    "Description": "Horizontal position of the left elbow VICON proxy (LELB) as estimated by Sapiens2-0.4B + ViconTraj-MS (head fine-tuned), as output (not cut at a score threshold), image px of the full frame, origin at the top-left corner, x to the right, y down; n/a where the model gives none.",
+    "Description": "Horizontal position of the left elbow VICON proxy (LELB) as estimated by Sapiens2-0.4B + ViTMS (head fine-tuned), as output (not cut at a score threshold), image px of the full frame, origin at the top-left corner, x to the right, y down; n/a where the model gives none.",
     "Units": "px"
   },
   "left_elbow_y": {
-    "Description": "Vertical position of the left elbow VICON proxy (LELB) as estimated by Sapiens2-0.4B + ViconTraj-MS (head fine-tuned), as output (not cut at a score threshold), image px of the full frame, origin at the top-left corner, x to the right, y down; n/a where the model gives none.",
+    "Description": "Vertical position of the left elbow VICON proxy (LELB) as estimated by Sapiens2-0.4B + ViTMS (head fine-tuned), as output (not cut at a score threshold), image px of the full frame, origin at the top-left corner, x to the right, y down; n/a where the model gives none.",
     "Units": "px"
   },
   "left_elbow_score": {
-    "Description": "Confidence of the keypoint as given by Sapiens2-0.4B + ViconTraj-MS (head fine-tuned) (heatmap maximum of the fine-tuned head, about 0-1.5), not comparable across models; truncated to 4 decimals. The paper's benchmark uses a position only where score >= 0.3."
+    "Description": "Confidence of the keypoint as given by Sapiens2-0.4B + ViTMS (head fine-tuned) (heatmap maximum of the fine-tuned head, about 0-1.5), not comparable across models; truncated to 4 decimals. The paper's benchmark uses a position only where score >= 0.3."
   },
   "left_wrist_x": {
-    "Description": "Horizontal position of the left wrist VICON proxy (mean of LWRA and LWRB) as estimated by Sapiens2-0.4B + ViconTraj-MS (head fine-tuned), as output (not cut at a score threshold), image px of the full frame, origin at the top-left corner, x to the right, y down; n/a where the model gives none.",
+    "Description": "Horizontal position of the left wrist VICON proxy (mean of LWRA and LWRB) as estimated by Sapiens2-0.4B + ViTMS (head fine-tuned), as output (not cut at a score threshold), image px of the full frame, origin at the top-left corner, x to the right, y down; n/a where the model gives none.",
     "Units": "px"
   },
   "left_wrist_y": {
-    "Description": "Vertical position of the left wrist VICON proxy (mean of LWRA and LWRB) as estimated by Sapiens2-0.4B + ViconTraj-MS (head fine-tuned), as output (not cut at a score threshold), image px of the full frame, origin at the top-left corner, x to the right, y down; n/a where the model gives none.",
+    "Description": "Vertical position of the left wrist VICON proxy (mean of LWRA and LWRB) as estimated by Sapiens2-0.4B + ViTMS (head fine-tuned), as output (not cut at a score threshold), image px of the full frame, origin at the top-left corner, x to the right, y down; n/a where the model gives none.",
     "Units": "px"
   },
   "left_wrist_score": {
-    "Description": "Confidence of the keypoint as given by Sapiens2-0.4B + ViconTraj-MS (head fine-tuned) (heatmap maximum of the fine-tuned head, about 0-1.5), not comparable across models; truncated to 4 decimals. The paper's benchmark uses a position only where score >= 0.3."
+    "Description": "Confidence of the keypoint as given by Sapiens2-0.4B + ViTMS (head fine-tuned) (heatmap maximum of the fine-tuned head, about 0-1.5), not comparable across models; truncated to 4 decimals. The paper's benchmark uses a position only where score >= 0.3."
   },
   "left_hand_x": {
-    "Description": "Horizontal position of the left hand VICON proxy (LHND) as estimated by Sapiens2-0.4B + ViconTraj-MS (head fine-tuned), as output (not cut at a score threshold), image px of the full frame, origin at the top-left corner, x to the right, y down; n/a where the model gives none.",
+    "Description": "Horizontal position of the left hand VICON proxy (LHND) as estimated by Sapiens2-0.4B + ViTMS (head fine-tuned), as output (not cut at a score threshold), image px of the full frame, origin at the top-left corner, x to the right, y down; n/a where the model gives none.",
     "Units": "px"
   },
   "left_hand_y": {
-    "Description": "Vertical position of the left hand VICON proxy (LHND) as estimated by Sapiens2-0.4B + ViconTraj-MS (head fine-tuned), as output (not cut at a score threshold), image px of the full frame, origin at the top-left corner, x to the right, y down; n/a where the model gives none.",
+    "Description": "Vertical position of the left hand VICON proxy (LHND) as estimated by Sapiens2-0.4B + ViTMS (head fine-tuned), as output (not cut at a score threshold), image px of the full frame, origin at the top-left corner, x to the right, y down; n/a where the model gives none.",
     "Units": "px"
   },
   "left_hand_score": {
-    "Description": "Confidence of the keypoint as given by Sapiens2-0.4B + ViconTraj-MS (head fine-tuned) (heatmap maximum of the fine-tuned head, about 0-1.5), not comparable across models; truncated to 4 decimals. The paper's benchmark uses a position only where score >= 0.3."
+    "Description": "Confidence of the keypoint as given by Sapiens2-0.4B + ViTMS (head fine-tuned) (heatmap maximum of the fine-tuned head, about 0-1.5), not comparable across models; truncated to 4 decimals. The paper's benchmark uses a position only where score >= 0.3."
   },
   "left_fingertip_x": {
-    "Description": "Horizontal position of the left fingertip VICON proxy (LFIN) as estimated by Sapiens2-0.4B + ViconTraj-MS (head fine-tuned), as output (not cut at a score threshold), image px of the full frame, origin at the top-left corner, x to the right, y down; n/a where the model gives none.",
+    "Description": "Horizontal position of the left fingertip VICON proxy (LFIN) as estimated by Sapiens2-0.4B + ViTMS (head fine-tuned), as output (not cut at a score threshold), image px of the full frame, origin at the top-left corner, x to the right, y down; n/a where the model gives none.",
     "Units": "px"
   },
   "left_fingertip_y": {
-    "Description": "Vertical position of the left fingertip VICON proxy (LFIN) as estimated by Sapiens2-0.4B + ViconTraj-MS (head fine-tuned), as output (not cut at a score threshold), image px of the full frame, origin at the top-left corner, x to the right, y down; n/a where the model gives none.",
+    "Description": "Vertical position of the left fingertip VICON proxy (LFIN) as estimated by Sapiens2-0.4B + ViTMS (head fine-tuned), as output (not cut at a score threshold), image px of the full frame, origin at the top-left corner, x to the right, y down; n/a where the model gives none.",
     "Units": "px"
   },
   "left_fingertip_score": {
-    "Description": "Confidence of the keypoint as given by Sapiens2-0.4B + ViconTraj-MS (head fine-tuned) (heatmap maximum of the fine-tuned head, about 0-1.5), not comparable across models; truncated to 4 decimals. The paper's benchmark uses a position only where score >= 0.3."
+    "Description": "Confidence of the keypoint as given by Sapiens2-0.4B + ViTMS (head fine-tuned) (heatmap maximum of the fine-tuned head, about 0-1.5), not comparable across models; truncated to 4 decimals. The paper's benchmark uses a position only where score >= 0.3."
   },
   "right_shoulder_x": {
-    "Description": "Horizontal position of the right shoulder VICON proxy (RSHO) as estimated by Sapiens2-0.4B + ViconTraj-MS (head fine-tuned), as output (not cut at a score threshold), image px of the full frame, origin at the top-left corner, x to the right, y down; n/a where the model gives none.",
+    "Description": "Horizontal position of the right shoulder VICON proxy (RSHO) as estimated by Sapiens2-0.4B + ViTMS (head fine-tuned), as output (not cut at a score threshold), image px of the full frame, origin at the top-left corner, x to the right, y down; n/a where the model gives none.",
     "Units": "px"
   },
   "right_shoulder_y": {
-    "Description": "Vertical position of the right shoulder VICON proxy (RSHO) as estimated by Sapiens2-0.4B + ViconTraj-MS (head fine-tuned), as output (not cut at a score threshold), image px of the full frame, origin at the top-left corner, x to the right, y down; n/a where the model gives none.",
+    "Description": "Vertical position of the right shoulder VICON proxy (RSHO) as estimated by Sapiens2-0.4B + ViTMS (head fine-tuned), as output (not cut at a score threshold), image px of the full frame, origin at the top-left corner, x to the right, y down; n/a where the model gives none.",
     "Units": "px"
   },
   "right_shoulder_score": {
-    "Description": "Confidence of the keypoint as given by Sapiens2-0.4B + ViconTraj-MS (head fine-tuned) (heatmap maximum of the fine-tuned head, about 0-1.5), not comparable across models; truncated to 4 decimals. The paper's benchmark uses a position only where score >= 0.3."
+    "Description": "Confidence of the keypoint as given by Sapiens2-0.4B + ViTMS (head fine-tuned) (heatmap maximum of the fine-tuned head, about 0-1.5), not comparable across models; truncated to 4 decimals. The paper's benchmark uses a position only where score >= 0.3."
   },
   "right_elbow_x": {
-    "Description": "Horizontal position of the right elbow VICON proxy (RELB) as estimated by Sapiens2-0.4B + ViconTraj-MS (head fine-tuned), as output (not cut at a score threshold), image px of the full frame, origin at the top-left corner, x to the right, y down; n/a where the model gives none.",
+    "Description": "Horizontal position of the right elbow VICON proxy (RELB) as estimated by Sapiens2-0.4B + ViTMS (head fine-tuned), as output (not cut at a score threshold), image px of the full frame, origin at the top-left corner, x to the right, y down; n/a where the model gives none.",
     "Units": "px"
   },
   "right_elbow_y": {
-    "Description": "Vertical position of the right elbow VICON proxy (RELB) as estimated by Sapiens2-0.4B + ViconTraj-MS (head fine-tuned), as output (not cut at a score threshold), image px of the full frame, origin at the top-left corner, x to the right, y down; n/a where the model gives none.",
+    "Description": "Vertical position of the right elbow VICON proxy (RELB) as estimated by Sapiens2-0.4B + ViTMS (head fine-tuned), as output (not cut at a score threshold), image px of the full frame, origin at the top-left corner, x to the right, y down; n/a where the model gives none.",
     "Units": "px"
   },
   "right_elbow_score": {
-    "Description": "Confidence of the keypoint as given by Sapiens2-0.4B + ViconTraj-MS (head fine-tuned) (heatmap maximum of the fine-tuned head, about 0-1.5), not comparable across models; truncated to 4 decimals. The paper's benchmark uses a position only where score >= 0.3."
+    "Description": "Confidence of the keypoint as given by Sapiens2-0.4B + ViTMS (head fine-tuned) (heatmap maximum of the fine-tuned head, about 0-1.5), not comparable across models; truncated to 4 decimals. The paper's benchmark uses a position only where score >= 0.3."
   },
   "right_wrist_x": {
-    "Description": "Horizontal position of the right wrist VICON proxy (mean of RWRA and RWRB) as estimated by Sapiens2-0.4B + ViconTraj-MS (head fine-tuned), as output (not cut at a score threshold), image px of the full frame, origin at the top-left corner, x to the right, y down; n/a where the model gives none.",
+    "Description": "Horizontal position of the right wrist VICON proxy (mean of RWRA and RWRB) as estimated by Sapiens2-0.4B + ViTMS (head fine-tuned), as output (not cut at a score threshold), image px of the full frame, origin at the top-left corner, x to the right, y down; n/a where the model gives none.",
     "Units": "px"
   },
   "right_wrist_y": {
-    "Description": "Vertical position of the right wrist VICON proxy (mean of RWRA and RWRB) as estimated by Sapiens2-0.4B + ViconTraj-MS (head fine-tuned), as output (not cut at a score threshold), image px of the full frame, origin at the top-left corner, x to the right, y down; n/a where the model gives none.",
+    "Description": "Vertical position of the right wrist VICON proxy (mean of RWRA and RWRB) as estimated by Sapiens2-0.4B + ViTMS (head fine-tuned), as output (not cut at a score threshold), image px of the full frame, origin at the top-left corner, x to the right, y down; n/a where the model gives none.",
     "Units": "px"
   },
   "right_wrist_score": {
-    "Description": "Confidence of the keypoint as given by Sapiens2-0.4B + ViconTraj-MS (head fine-tuned) (heatmap maximum of the fine-tuned head, about 0-1.5), not comparable across models; truncated to 4 decimals. The paper's benchmark uses a position only where score >= 0.3."
+    "Description": "Confidence of the keypoint as given by Sapiens2-0.4B + ViTMS (head fine-tuned) (heatmap maximum of the fine-tuned head, about 0-1.5), not comparable across models; truncated to 4 decimals. The paper's benchmark uses a position only where score >= 0.3."
   },
   "right_hand_x": {
-    "Description": "Horizontal position of the right hand VICON proxy (RHND) as estimated by Sapiens2-0.4B + ViconTraj-MS (head fine-tuned), as output (not cut at a score threshold), image px of the full frame, origin at the top-left corner, x to the right, y down; n/a where the model gives none.",
+    "Description": "Horizontal position of the right hand VICON proxy (RHND) as estimated by Sapiens2-0.4B + ViTMS (head fine-tuned), as output (not cut at a score threshold), image px of the full frame, origin at the top-left corner, x to the right, y down; n/a where the model gives none.",
     "Units": "px"
   },
   "right_hand_y": {
-    "Description": "Vertical position of the right hand VICON proxy (RHND) as estimated by Sapiens2-0.4B + ViconTraj-MS (head fine-tuned), as output (not cut at a score threshold), image px of the full frame, origin at the top-left corner, x to the right, y down; n/a where the model gives none.",
+    "Description": "Vertical position of the right hand VICON proxy (RHND) as estimated by Sapiens2-0.4B + ViTMS (head fine-tuned), as output (not cut at a score threshold), image px of the full frame, origin at the top-left corner, x to the right, y down; n/a where the model gives none.",
     "Units": "px"
   },
   "right_hand_score": {
-    "Description": "Confidence of the keypoint as given by Sapiens2-0.4B + ViconTraj-MS (head fine-tuned) (heatmap maximum of the fine-tuned head, about 0-1.5), not comparable across models; truncated to 4 decimals. The paper's benchmark uses a position only where score >= 0.3."
+    "Description": "Confidence of the keypoint as given by Sapiens2-0.4B + ViTMS (head fine-tuned) (heatmap maximum of the fine-tuned head, about 0-1.5), not comparable across models; truncated to 4 decimals. The paper's benchmark uses a position only where score >= 0.3."
   },
   "right_fingertip_x": {
-    "Description": "Horizontal position of the right fingertip VICON proxy (RFIN) as estimated by Sapiens2-0.4B + ViconTraj-MS (head fine-tuned), as output (not cut at a score threshold), image px of the full frame, origin at the top-left corner, x to the right, y down; n/a where the model gives none.",
+    "Description": "Horizontal position of the right fingertip VICON proxy (RFIN) as estimated by Sapiens2-0.4B + ViTMS (head fine-tuned), as output (not cut at a score threshold), image px of the full frame, origin at the top-left corner, x to the right, y down; n/a where the model gives none.",
     "Units": "px"
   },
   "right_fingertip_y": {
-    "Description": "Vertical position of the right fingertip VICON proxy (RFIN) as estimated by Sapiens2-0.4B + ViconTraj-MS (head fine-tuned), as output (not cut at a score threshold), image px of the full frame, origin at the top-left corner, x to the right, y down; n/a where the model gives none.",
+    "Description": "Vertical position of the right fingertip VICON proxy (RFIN) as estimated by Sapiens2-0.4B + ViTMS (head fine-tuned), as output (not cut at a score threshold), image px of the full frame, origin at the top-left corner, x to the right, y down; n/a where the model gives none.",
     "Units": "px"
   },
   "right_fingertip_score": {
-    "Description": "Confidence of the keypoint as given by Sapiens2-0.4B + ViconTraj-MS (head fine-tuned) (heatmap maximum of the fine-tuned head, about 0-1.5), not comparable across models; truncated to 4 decimals. The paper's benchmark uses a position only where score >= 0.3."
+    "Description": "Confidence of the keypoint as given by Sapiens2-0.4B + ViTMS (head fine-tuned) (heatmap maximum of the fine-tuned head, about 0-1.5), not comparable across models; truncated to 4 decimals. The paper's benchmark uses a position only where score >= 0.3."
   }
 }

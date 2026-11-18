@@ -29,7 +29,7 @@ DOC = ROOT / "outputs" / "paper"
 TAB, FIG = DOC / "tables", DOC / "fig"
 INK, INK2, INK3, GRID = "#0b0b0b", "#52514e", "#8a8984", "#e4e3df"
 SLOT = ["#2a78d6", "#eb6834", "#1baf7a", "#eda100", "#e87ba4", "#008300"]
-# zero-shot models; results figure: light red zero-shot, dark blue with ViconTraj-MS (ViTMS in the paper)
+# zero-shot models; results figure: light red zero-shot, dark blue with ViTMS
 ZS = ["vitpose_b", "rtmpose_wb", "rtmpose_hand", "dwpose_l", "rtmw_x", "sapiens2_0.4b", "sapiens2_1b", "blazepose"]
 ZS_COL, FT_COL = "#ff7e79", "#0076ba"
 LAB = {"vitpose_b": "ViTPose+-B", "vitpose_l": "ViTPose+-L", "vitpose_h": "ViTPose+-H", "rtmpose_wb": "RTMPose-WB", "dwpose_l": "DWPose-L",
@@ -74,7 +74,7 @@ def with_desc(v):
 
 
 def best_with(q2, v):
-    """The ViconTraj-MS variant of zero-shot model v with the lowest mean 3D fingertip and wrist median in q2."""
+    """The ViTMS variant of zero-shot model v with the lowest mean 3D fingertip and wrist median in q2."""
     g = q2
     cand = [w for w in WITH[v] if w in set(g.variant)]
     if not cand:

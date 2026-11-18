@@ -1,4 +1,4 @@
-"""Marker labels and crops for ViconTraj-MS fine-tuning, one file per valid clip with a calibrated camera.
+"""Marker labels and crops for ViTMS fine-tuning, one file per valid clip with a calibrated camera.
 
 Every blob frame (every third frame of the movement window) is cropped around the participant box; joints are the 6 Hz
 low-passed VICON proxies projected with the video's camera. Writes outputs/benchmark/labels/<pid>/<view>/<clip>.npz:

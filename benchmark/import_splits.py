@@ -14,7 +14,7 @@ from pathlib import Path
 from benchlib import BENCH, ROOT
 
 SPLITS_NOTE = ("Participant splits of the paper with study IDs (derivatives/vikitraj/splits.json of the release). "
-               "folds lists fold 1 ... fold 5; ViconTraj-MS trains on folds 2-5, stops early on fold 1 and is scored "
+               "folds lists fold 1 ... fold 5; ViTMS trains on folds 2-5, stops early on fold 1 and is scored "
                "on the test participants. cross_visit: train and test visit (not used in the paper).")
 
 

@@ -1,4 +1,4 @@
-"""ViconTraj-MS for Sapiens2 (0.4B, 1B): the pose head is trained on the joint set, the backbone stays frozen.
+"""ViTMS for Sapiens2 (0.4B, 1B): the pose head is trained on the joint set, the backbone stays frozen.
 
 Reads the 768 x 1024 crops of every 9th frame in outputs/benchmark/labels_hr (labels.py --size 768x1024 --every 3
 --out labels_hr, then labels_traj.py --labels labels_hr). Splits, loss weights and augmentation as in finetune.py,

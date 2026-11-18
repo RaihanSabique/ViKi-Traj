@@ -1,4 +1,4 @@
-"""Trajectory labels of ViconTraj-MS: the game's end-effector trajectory as the fingertip label of the active hand.
+"""Trajectory labels of ViTMS: the game's end-effector trajectory as the fingertip label of the active hand.
 
 The screen plane X = [s, 1] B (game px -> VICON mm) is fitted on the active-hand FIN marker per VICON recording, else
 per visit; the label exists wherever the game trajectory does. Adds kp_traj (N, 2), crop px of the trajectory point at

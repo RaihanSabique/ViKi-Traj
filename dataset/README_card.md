@@ -63,7 +63,7 @@ license and DOI are withheld for double-blind review. The datasheet is Section A
 | End-effector trajectory | finger position while it drags the game object (which follows it), on the screen in mm, about 120 Hz while dragging, with touch events |
 | Video clips | 617 top and 650 side clips, 1920x1080 at 30 Hz; side clips head-blurred, top clips unblurred (filmed from back) |
 | Labels | per frame of the 539 top and 535 side clips with VICON data and a usable camera: 10 joints and 24 markers projected into the image; visibility on every third frame of clips valid in that view |
-| Model outputs | 2D keypoints of 8 zero-shot models and 8 ViconTraj-MS variants, person boxes, two-view 3D tracks of the active arm |
+| Model outputs | 2D keypoints of 8 zero-shot models and 8 ViTMS variants, person boxes, two-view 3D tracks of the active arm |
 | Splits | 8 test participants (5 TD, 3 UCP), 21 development participants in 5 folds |
 
 ## Layout

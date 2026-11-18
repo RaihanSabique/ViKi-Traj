@@ -28,7 +28,7 @@ The data are provided as is, without warranty of any kind.
 
 CHANGES = """1.0.0 Unknown Release Date (review copy)
   - Initial release: 29 participants, 696 trials of the reaching task (VICON, end-effector trajectory, top and
-    side video clips, labels, model keypoints, person boxes, 3D tracks, results and ViconTraj-MS checkpoints).
+    side video clips, labels, model keypoints, person boxes, 3D tracks, results and ViTMS checkpoints).
 """
 
 CITATION = """cff-version: 1.2.0
