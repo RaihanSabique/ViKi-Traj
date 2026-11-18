@@ -22,6 +22,7 @@ from align_videos import GRID_HZ, game_velocity, load_paths               # noqa
 from benchlib import ALIGNED, MODEL_LABEL, manifest, markers              # noqa: E402
 from e3_screen import apply_affine3, fit_affine3, game_paths, sources_for_path   # noqa: E402
 from evaluate import ref_track                                            # noqa: E402
+from figstyle import use_fonts                                            # noqa: E402
 
 INK, INK2, INK3, GRID = "#0b0b0b", "#52514e", "#8a8984", "#e4e3df"
 SLOT = ["#2a78d6", "#eb6834", "#1baf7a", "#eda100", "#e87ba4", "#008300"]
@@ -29,10 +30,10 @@ FT = "ft_b_full_pooled"
 
 
 def style():
-    plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 6.5, "axes.edgecolor": INK3, "axes.labelcolor": INK2, "xtick.color": INK2,
-                         "ytick.color": INK2, "axes.titlecolor": INK, "pdf.fonttype": 42, "axes.spines.top": False, "axes.spines.right": False,
-                         "axes.grid": True, "grid.color": GRID, "grid.linewidth": 0.5, "axes.axisbelow": True, "legend.frameon": False,
-                         "legend.fontsize": 5.6, "xtick.labelsize": 5.6, "ytick.labelsize": 5.6, "axes.labelsize": 6, "axes.titlesize": 7})
+    plt.rcParams.update({"axes.edgecolor": INK3, "axes.labelcolor": INK2, "xtick.color": INK2, "ytick.color": INK2, "axes.titlecolor": INK,
+                         "axes.spines.top": False, "axes.spines.right": False, "axes.grid": True, "grid.color": GRID, "grid.linewidth": 0.5,
+                         "axes.axisbelow": True, "legend.frameon": False})
+    use_fonts()                                                           # Times at one size (figstyle.py)
 
 
 # ----------------------------------------------------------------------------- screen

@@ -74,14 +74,16 @@ def tile(r, view, f, models, cams, blur, mirror="auto"):
     return cv2.cvtColor(img[y0:y1, x0:x1], cv2.COLOR_BGR2RGB), gt - [x0, y0], {m: k - [x0, y0] for m, k in kps.items()}
 
 
-def draw(ax, im, gt, kps, title):
+def draw(ax, im, gt, kps, title, fs=9, scale=1.0):
+    """scale: line widths and marker sizes relative to the default 10.5-in figure of main()."""
+    a = scale ** 2
     ax.imshow(im)
     for m, k in kps.items():
-        ax.plot(k[:, 0], k[:, 1], "-", color=COL[m], lw=2, alpha=0.9)
-        ax.scatter(k[:, 0], k[:, 1], s=36, color=COL[m], edgecolor="white", linewidth=0.8, zorder=3, label=LAB[m])
-    ax.scatter(gt[:, 0], gt[:, 1], s=90, facecolor="none", edgecolor="white", linewidth=2, zorder=4)
-    ax.scatter(gt[:, 0], gt[:, 1], s=90, facecolor="none", edgecolor="black", linewidth=0.6, zorder=4, label="VICON (projected)")
-    ax.set_title(title, fontsize=9)
+        ax.plot(k[:, 0], k[:, 1], "-", color=COL[m], lw=2 * scale, alpha=0.9)
+        ax.scatter(k[:, 0], k[:, 1], s=36 * a, color=COL[m], edgecolor="white", linewidth=0.8 * scale, zorder=3, label=LAB[m])
+    ax.scatter(gt[:, 0], gt[:, 1], s=90 * a, facecolor="none", edgecolor="white", linewidth=2 * scale, zorder=4)
+    ax.scatter(gt[:, 0], gt[:, 1], s=90 * a, facecolor="none", edgecolor="black", linewidth=0.6 * scale, zorder=4, label="VICON (projected)")
+    ax.set_title(title, fontsize=fs)
     ax.set_axis_off()
 
 
@@ -115,9 +117,10 @@ def worst_frame(r, view, model, cams):
     return int(z["frame"][np.nanargmax(e)])
 
 
-def main():
-    argparse.ArgumentParser(description=__doc__.splitlines()[0]).parse_args()
-    OUT.mkdir(parents=True, exist_ok=True)
+def main(figsize=(10.5, 7.2), fs=9, out=OUT, name="qualitative", exts=("png", "pdf")):
+    """Arguments: the size of the figure and its text; analysis/make_results.py draws it at the printed width."""
+    out.mkdir(parents=True, exist_ok=True)
+    scale = figsize[0] / 10.5
     cams = cameras()
     blur = FaceBlur()
     m = manifest()
@@ -126,29 +129,30 @@ def main():
     # the third valid trial of one TD and one UCP test participant
     td = ok[(~ok.motor_impaired) & (ok.pid == "XXXXXXX110")].iloc[2]
     ucp = ok[ok.motor_impaired & (ok.pid == "XXXXXXX203")].iloc[2]
-    fig, axes = plt.subplots(2, 3, figsize=(10.5, 7.2))
-    for c, (r, name) in enumerate(((td, "TD"), (ucp, "UCP"))):
+    fig, axes = plt.subplots(2, 3, figsize=figsize)
+    for c, (r, grp) in enumerate(((td, "TD"), (ucp, "UCP"))):
         for rr, view in enumerate(("top", "side")):
             im, gt, kps = tile(r, view, peak_frame(r, view), ["sapiens2_1b", "rtmpose_wb"], cams, blur)
-            draw(axes[rr, c], im, gt, kps, f"{name} child, {view} view (peak fingertip speed)")
+            draw(axes[rr, c], im, gt, kps, f"{grp} child, {view} view (peak fingertip speed)", fs, scale)
     # failure 1: top-view frame with the largest RTMPose-WB fingertip error
     p = __import__("pandas").read_csv(BENCH / "results" / "E1_2d_paths.csv")
     q = p[(p.variant == "rtmpose_wb") & (p.view == "top") & (p.joint == "fingertip") & (p.role == "active") & (p.labels == "all")
           & p.pid.isin(test)].sort_values("median_mm", ascending=False).iloc[0]
     r = m[(m.pid == q.pid) & (m.aligned_mat_row == q.row)].iloc[0]
     im, gt, kps = tile(r, "top", worst_frame(r, "top", "rtmpose_wb", cams), ["rtmpose_wb", "sapiens2_1b"], cams, blur)
-    draw(axes[0, 2], im, gt, kps, "Failure: largest RTMPose-WB fingertip error (top)")
+    draw(axes[0, 2], im, gt, kps, "Failure: largest RTMPose-WB fingertip error (top)", fs, scale)
     # failure 2: BlazePose with the fixed top-view swap on a visit filmed from the front
     im, gt, kps = tile(td, "top", peak_frame(td, "top"), ["blazepose"], cams, blur, mirror="view")
-    draw(axes[1, 2], im, gt, kps, "Failure: BlazePose sides under a fixed swap")
+    draw(axes[1, 2], im, gt, kps, "Failure: BlazePose sides under a fixed swap", fs, scale)
     h, l = axes[0, 0].get_legend_handles_labels()
     h2, l2 = axes[1, 2].get_legend_handles_labels()
-    fig.legend(h[:2] + h2[:1] + h[-1:], l[:2] + l2[:1] + l[-1:], loc="lower center", ncol=4, frameon=False, fontsize=9)
-    fig.tight_layout(rect=(0, 0.04, 1, 1))
-    for ext in ("png", "pdf"):
-        fig.savefig(OUT / f"qualitative.{ext}", dpi=200)
-    print("wrote", OUT / "qualitative.png")
+    fig.legend(h[:2] + h2[:1] + h[-1:], l[:2] + l2[:1] + l[-1:], loc="lower center", ncol=4, frameon=False, fontsize=fs)
+    fig.tight_layout(rect=(0, 0.04, 1, 1), h_pad=1.2)
+    for ext in exts:
+        fig.savefig(out / f"{name}.{ext}", dpi=200)
+    print("wrote", out / f"{name}.{exts[0]}")
 
 
 if __name__ == "__main__":
+    argparse.ArgumentParser(description=__doc__.splitlines()[0]).parse_args()
     main()

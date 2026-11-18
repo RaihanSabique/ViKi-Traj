@@ -8,6 +8,7 @@ video/video_alignment_summary_all.csv) and release/private/id_map.tsv. Writes ou
 """
 import argparse
 import json
+import sys
 from pathlib import Path
 
 import matplotlib
@@ -16,6 +17,10 @@ import pandas as pd
 
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+from matplotlib.lines import Line2D
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from figstyle import TEXTWIDTH, use_fonts                                 # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
 AB = ROOT / "outputs/game_vicon_aligned/reaching"
@@ -126,43 +131,45 @@ def main():
         f.write("\\bottomrule\n\\end{tabular}\n")
 
     # ------------------------------------------------------------------ Figure: dataset QA
-    plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 8, "axes.edgecolor": INK3, "axes.labelcolor": INK2,
-                         "xtick.color": INK2, "ytick.color": INK2, "axes.titlecolor": INK, "pdf.fonttype": 42,
+    plt.rcParams.update({"axes.edgecolor": INK3, "axes.labelcolor": INK2, "xtick.color": INK2, "ytick.color": INK2, "axes.titlecolor": INK,
                          "axes.spines.top": False, "axes.spines.right": False, "axes.grid": True, "grid.color": GRID,
-                         "grid.linewidth": 0.6, "axes.axisbelow": True, "legend.frameon": False, "legend.fontsize": 7})
-    fig, axs = plt.subplots(1, 3, figsize=(7.0, 2.4), dpi=200, gridspec_kw=dict(width_ratios=(0.95, 1.4, 0.95)))
+                         "grid.linewidth": 0.6, "axes.axisbelow": True, "legend.frameon": False})
+    use_fonts()                                                           # Times at one size (figstyle.py)
+    fig, axs = plt.subplots(1, 3, figsize=(TEXTWIDTH, 2.6), dpi=200, gridspec_kw=dict(width_ratios=(0.95, 1.4, 0.95)))   # printed at \\textwidth
     fig.patch.set_facecolor(SURF)
     for a_ in axs.ravel():
         a_.set_facecolor(SURF)
     # (a) trial duration by group
     a1 = axs[0]
     bins = np.arange(0, 42, 2)
+    hs1 = []
     for i, grp in enumerate(("TD", "UCP")):
         d = np.clip(m[m.group == grp].move_duration_s, 0, 40)
-        a1.hist(d, bins=bins, histtype="step", lw=1.6, color=CAT[i], label=f"{grp} (n = {int((pid == grp).sum())})")
+        a1.hist(d, bins=bins, histtype="step", lw=1.6, color=CAT[i])
+        hs1.append(Line2D([], [], color=CAT[i], lw=1.6, label=f"{grp} (n = {int((pid == grp).sum())})"))     # lines, not boxes
     a1.set_xlabel("trial duration (s, clipped at 40)")
     a1.set_ylabel("trials")
-    a1.set_title("a  Trial duration by group", loc="left", fontsize=8.5, fontweight="bold")
-    a1.legend(loc="upper right")
+    a1.set_title("a  Trial duration by group", loc="left", fontweight="bold")
+    a1.legend(handles=hs1, loc="upper right")
     # (b) usable trials per participant and stream
     a2 = axs[1]
     per = m.groupby("pid").agg(group=("group", "first"), vicon=("vicon_valid", "sum"), top=("top_valid", "sum"),
                                side=("side_valid", "sum"), three=("all3", "sum"))
     per = per.sort_values(["group", "three"], ascending=[True, False])
     x = np.arange(len(per))
-    for i, (col, lab, mk) in enumerate([("vicon", "Vicon", "o"), ("top", "top", "s"), ("side", "side", "^"), ("three", "all three", "D")]):
+    for i, (col, lab, mk) in enumerate([("vicon", "VICON", "o"), ("top", "top", "s"), ("side", "side", "^"), ("three", "all three", "D")]):
         a2.scatter(x, per[col], s=14, marker=mk, color=CAT[i], label=lab, zorder=3, linewidths=0)
     a2.set_xticks(x)
     sub = public_ids()
-    a2.set_xticklabels([sub[p] for p in per.index], rotation=90, fontsize=6)
+    a2.set_xticklabels([sub[p] for p in per.index], rotation=90)
     split = int((per.group == "TD").sum()) - 0.5
     a2.axvline(split, color=INK3, lw=0.8, ls=":")
-    a2.text(split / 2, 25.5, "TD", ha="center", color=INK2, fontsize=7)
-    a2.text(split + (len(per) - split) / 2, 25.5, "UCP", ha="center", color=INK2, fontsize=7)
+    a2.text(split / 2, 25.5, "TD", ha="center", color=INK2)
+    a2.text(split + (len(per) - split) / 2, 25.5, "UCP", ha="center", color=INK2)
     a2.set_ylim(0, 27)
     a2.set_ylabel("usable trials (of 24)")
     a2.set_xlabel("participant")
-    a2.set_title("b  Usable trials per participant", loc="left", fontsize=8.5, fontweight="bold")
+    a2.set_title("b  Usable trials per participant", loc="left", fontweight="bold")
     a2.legend(loc="lower left", ncol=4, columnspacing=0.8, handletextpad=0.3)
     # (c) video match quality
     a3 = axs[2]
@@ -170,11 +177,11 @@ def main():
         d = vs[vs.view == view]
         a3.scatter(d.margin, d.score, s=16, color=CAT[i], label=f"{view} videos (n = {len(d)})", linewidths=0, zorder=3)
     a3.axvline(0.1, color=INK3, lw=0.8, ls="--")
-    a3.text(0.105, 0.97, "ambiguous\nmatch", color=INK2, fontsize=6.5, va="top")
+    a3.text(0.105, 0.97, "ambiguous\nmatch", color=INK2, va="top")
     a3.set_xlabel("margin over 2nd-best lag")
     a3.set_ylabel("flow–game-object correlation")
-    a3.set_title("c  Video–game match", loc="left", fontsize=8.5, fontweight="bold")
-    a3.legend(loc="lower right", bbox_to_anchor=(1.02, 0.0), fontsize=6)
+    a3.set_title("c  Video–game match", loc="left", fontweight="bold")
+    a3.legend(loc="lower right", bbox_to_anchor=(1.02, 0.0))
     fig.tight_layout(w_pad=1.2)
     fig.savefig(FIG / "dataset_qa.pdf", facecolor=SURF)
     fig.savefig(FIG / "dataset_qa.png", facecolor=SURF)

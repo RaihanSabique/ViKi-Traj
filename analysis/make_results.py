@@ -1,6 +1,6 @@
 """Result tables, figures and text macros of the paper, from the benchmark outputs (E1-E7).
 
-Reads outputs/benchmark (results/*.csv, splits.json, cameras/, finetune/, labels/, tracks3d/, reports/E7/) and
+Reads outputs/benchmark (results/*.csv, splits.json, cameras/, finetune/, labels/, tracks3d/) and
 release/private/id_map.tsv. Writes outputs/paper/tables/{res_*, splits}.tex, where res_macros.tex holds the numbers
 quoted in the text, and outputs/paper/fig/{results_zs_ft, analyses, kin_icc, qualitative}.pdf. Scores: per-participant
 median, mean over participants, bootstrap 95 % CI; test split (8 participants), active arm, unless stated.
@@ -9,7 +9,6 @@ median, mean over participants, bootstrap 95 % CI; test split (8 participants), 
 """
 import argparse
 import json
-import shutil
 import sys
 from pathlib import Path
 
@@ -19,6 +18,7 @@ import pandas as pd
 
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt                                          # noqa: E402
+from figstyle import FS, TEXTWIDTH, use_fonts                            # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "benchmark"))
@@ -29,7 +29,7 @@ DOC = ROOT / "outputs" / "paper"
 TAB, FIG = DOC / "tables", DOC / "fig"
 INK, INK2, INK3, GRID = "#0b0b0b", "#52514e", "#8a8984", "#e4e3df"
 SLOT = ["#2a78d6", "#eb6834", "#1baf7a", "#eda100", "#e87ba4", "#008300"]
-# zero-shot models; results figure: light red zero-shot, dark blue with ViconTraj-MS
+# zero-shot models; results figure: light red zero-shot, dark blue with ViconTraj-MS (ViTMS in the paper)
 ZS = ["vitpose_b", "rtmpose_wb", "rtmpose_hand", "dwpose_l", "rtmw_x", "sapiens2_0.4b", "sapiens2_1b", "blazepose"]
 ZS_COL, FT_COL = "#ff7e79", "#0076ba"
 LAB = {"vitpose_b": "ViTPose+-B", "vitpose_l": "ViTPose+-L", "vitpose_h": "ViTPose+-H", "rtmpose_wb": "RTMPose-WB", "dwpose_l": "DWPose-L",
@@ -633,10 +633,10 @@ def splits_table():
 
 # ----------------------------------------------------------------------------- figures
 def setup_style():
-    plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 7, "axes.edgecolor": INK3, "axes.labelcolor": INK2, "xtick.color": INK2,
-                         "ytick.color": INK, "axes.titlecolor": INK, "pdf.fonttype": 42, "axes.spines.top": False, "axes.spines.right": False,
-                         "axes.grid": True, "grid.color": GRID, "grid.linewidth": 0.5, "axes.axisbelow": True, "legend.frameon": False,
-                         "legend.fontsize": 6, "xtick.labelsize": 6, "ytick.labelsize": 6.5, "axes.labelsize": 6.5, "axes.titlesize": 7})
+    plt.rcParams.update({"axes.edgecolor": INK3, "axes.labelcolor": INK2, "xtick.color": INK2, "ytick.color": INK, "axes.titlecolor": INK,
+                         "axes.spines.top": False, "axes.spines.right": False, "axes.grid": True, "grid.color": GRID, "grid.linewidth": 0.5,
+                         "axes.axisbelow": True, "legend.frameon": False})
+    use_fonts()                                                           # Times at one size (figstyle.py)
 
 
 def save(fig, name):
@@ -686,7 +686,7 @@ def fig_zs_ft(q1, q2, ang):
     macro("zsVitWristAsTipThreeD", f1(wf[0]))
     macro("zsVitWristAsTipCiLo", f1(wf[1]))
     macro("zsVitWristAsTipCiHi", f1(wf[2]))
-    fig, axes = plt.subplots(1, 5, figsize=(7.0, 3.65), sharey=True)
+    fig, axes = plt.subplots(1, 5, figsize=(0.9 * TEXTWIDTH, 3.9), sharey=True)        # printed at 0.9 \\textwidth
     y_zs = {v: 1.0 * i for i, v in enumerate(ZS)}
     vicon_screen = e3.loc["Vicon FIN"]
     for ax, (key, title, w) in zip(axes, panels):
@@ -694,12 +694,12 @@ def fig_zs_ft(q1, q2, ang):
         w.columns = ["v", "lo", "hi"]
         if key == "traj":
             ax.axvline(vicon_screen.rmse_mm, color=INK2, lw=0.8, ls=(0, (3, 2)), zorder=0)
-            ax.text(vicon_screen.rmse_mm, -0.62, f" VICON {vicon_screen.rmse_mm:.1f}", fontsize=5.5, color=INK2, va="bottom", ha="left")
+            ax.text(vicon_screen.rmse_mm, -0.62, f" VICON {vicon_screen.rmse_mm:.1f}", color=INK2, va="bottom", ha="left")
         for v, b in pairs:
             for k, (name, dy, col) in enumerate(((v, -0.19, ZS_COL), (b, 0.19, FT_COL))):
                 if name is None or name not in w.index or not np.isfinite(w.v.get(name, np.nan)):
                     if k == 0:
-                        ax.text(0, y_zs[v] + dy, " n/a", va="center", fontsize=5, color=INK3)
+                        ax.text(0, y_zs[v] + dy, " n/a", va="center", color=INK3)
                     continue
                 r = w.loc[name]
                 ax.barh(y_zs[v] + dy, r.v, height=0.36, color=col, edgecolor="white", linewidth=0.5)
@@ -708,9 +708,9 @@ def fig_zs_ft(q1, q2, ang):
                 lab = f" {r.v:.1f}"
                 if k == 0 and v == "vitpose_b" and key in ("fingertip", "traj"):
                     lab += "\u2021"                                                     # wrist used as the fingertip
-                ax.text(r.hi, y_zs[v] + dy, lab, va="center", fontsize=5.2, color=INK)
+                ax.text(r.hi, y_zs[v] + dy, lab, va="center", color=INK)
         keep = [n for n in shown if n in w.index and not (n == "vitpose_b" and key == "fingertip")]
-        xmax = np.nanmax(w.hi.reindex(keep).values) * 1.38
+        xmax = np.nanmax(w.hi.reindex(keep).values) * 1.55
         ax.set_xlim(0, xmax)
         # the wrist-as-fingertip bar runs off the axis
         if key == "fingertip" and "vitpose_b" in w.index:
@@ -719,21 +719,22 @@ def fig_zs_ft(q1, q2, ang):
                     t.set_x(xmax * 0.98)
                     t.set_ha("right")
                     t.set_bbox(dict(facecolor="white", lw=0, pad=0.5))
-        ax.set_title(title, fontsize=6.5, linespacing=1.15)
+        ax.set_title(title, linespacing=1.15)
         ax.grid(False)
         ax.set_ylim(len(ZS) - 0.5, -0.75)
     axes[0].set_yticks([y_zs[v] for v in ZS])
     axes[0].set_yticklabels([FIGLAB[v] for v in ZS])
     fig.tight_layout(w_pad=1.6, rect=(0, 0, 1, 0.955))
     hs = [plt.Rectangle((0, 0), 1, 1, facecolor=ZS_COL, label="Zero-shot"),
-          plt.Rectangle((0, 0), 1, 1, facecolor=FT_COL, label="With ViconTraj-MS")]
-    fig.legend(handles=hs, loc="upper right", ncol=2, fontsize=6, bbox_to_anchor=(axes[-1].get_position().x1, 1.0), borderaxespad=0,
+          plt.Rectangle((0, 0), 1, 1, facecolor=FT_COL, label="ViTMS")]
+    fig.legend(handles=hs, loc="upper right", ncol=2, bbox_to_anchor=(axes[-1].get_position().x1, 1.0), borderaxespad=0,
                handlelength=1.4, columnspacing=1.2)                              # top right, flush with the last panel
     save(fig, "results_zs_ft")
 
 
 def fig_analyses(a, b, c, d):
-    fig, axes = plt.subplots(1, 4, figsize=(7.0, 2.05), gridspec_kw=dict(width_ratios=(1.15, 0.9, 1.05, 1.1)))
+    fig, axes = plt.subplots(2, 2, figsize=(TEXTWIDTH, 4.6))             # printed at \\textwidth; 2 x 2 for 7-pt text
+    axes = axes.ravel()
     # (a) group x limb, 3D wrist, all participants
     ax = axes[0]
     qa = a[(a.split == "all") & (a.role == "active") & (a.view == "3d") & (a.joint == "wrist")]
@@ -744,7 +745,7 @@ def fig_analyses(a, b, c, d):
         ax.errorbar(np.arange(4) + (k - 1) * 0.2, w.value, yerr=[w.value - w.ci_lo, w.ci_hi - w.value], fmt=MARK[v], ms=3.6, color=family_color(v),
                     mec="white", mew=0.4, label=FIGLAB[v], capsize=0, elinewidth=0.7)
     ax.set_xticks(range(4))
-    ax.set_xticklabels(names, fontsize=5.4)
+    ax.set_xticklabels(names)
     ax.set_xlim(-0.55, 3.55)
     ax.set_ylabel("3-D wrist error (mm)")
     ax.set_ylim(0, None)
@@ -775,8 +776,8 @@ def fig_analyses(a, b, c, d):
     ax.set_xticks([0, 33, 67, 100, 200])
     ax.set_xlabel("timing shift (ms)")
     ax.set_ylabel("3-D wrist error (mm)")
-    ax.set_ylim(0, 38)
-    ax.legend(loc="upper left", ncol=2, columnspacing=0.6, handletextpad=0.3, fontsize=5.0, labelspacing=0.25)
+    ax.set_ylim(0, 46)                                                    # room for the legend above the lines
+    ax.legend(loc="upper left", ncol=2, columnspacing=0.6, handletextpad=0.3, labelspacing=0.25)
     ax.set_title("c  Alignment shift", loc="left", fontweight="bold")
     # (d) views
     ax = axes[3]
@@ -789,17 +790,17 @@ def fig_analyses(a, b, c, d):
             ax.bar(x + jj * 1.0 + (k - 1) * 0.28, vals, width=0.26, color=[family_color(m) for m in models], alpha=(1.0, 0.7, 0.45)[k],
                    edgecolor="white", linewidth=0.4, label=lab if jj == 0 else None)
     ax.set_xticks(x + 0.5)
-    ax.set_xticklabels(["RTMW-X", "Sapiens2-\n1B", "ViTPose+-B\nFT full"], fontsize=5.4)
+    ax.set_xticklabels(["RTMW-X", "Sapiens2-\n1B", "ViTPose+-B\nFT full"])
     ax.set_xlim(-0.7, x[-1] + 1.7)
     for i, m in enumerate(models):
         for jj, j in enumerate(("wrist", "fingertip")):
             top = max(qd.median_mm.get((m, j, view), 0) for view in ("top", "side", "3d"))
-            ax.text(x[i] + jj * 1.0, top + 1.2, "W" if j == "wrist" else "F", ha="center", va="bottom", fontsize=5.4, color=INK2)
+            ax.text(x[i] + jj * 1.0, top + 1.2, "W" if j == "wrist" else "F", ha="center", va="bottom", color=INK2)
     ax.set_ylabel("median error (mm)")
     ax.set_ylim(0, 44)
     ax.legend(loc="upper right", handlelength=1.0, labelspacing=0.25)
     ax.set_title("d  Views", loc="left", fontweight="bold")
-    fig.tight_layout(w_pad=0.5)
+    fig.tight_layout(w_pad=1.5, h_pad=1.2)
     save(fig, "analyses")
 
 
@@ -810,35 +811,33 @@ def fig_icc(g):
     feats = [f"{j}_{f}" for j in ("wrist", "fingertip") for f in ("peak_speed", "time_to_peak", "straightness", "n_peaks", "sparc", "ldlj")]
     flab = [f"{'W' if f.startswith('wrist') else 'F'}: {f.split('_', 1)[1].replace('_', ' ').replace('n peaks', 'speed peaks').replace('sparc', 'SPARC').replace('ldlj', 'LDLJ')}" for f in feats]
     q = g[g.split == "test"].pivot_table(index="source", columns="feature", values="icc21").reindex(index=srcs, columns=feats)
-    fig, ax = plt.subplots(figsize=(7.0, 0.6 + 0.2 * len(srcs)))
+    fig, ax = plt.subplots(figsize=(TEXTWIDTH, 0.7 + 0.21 * len(srcs)))                  # printed at \\textwidth
     im = ax.imshow(q.values, cmap="Blues", vmin=0, vmax=1, aspect="auto")
     for i in range(len(srcs)):
         for j in range(len(feats)):
             v = q.values[i, j]
             if np.isfinite(v):
-                ax.text(j, i, f"{v:.2f}", ha="center", va="center", fontsize=6, color="white" if v > 0.6 else INK)
+                ax.text(j, i, f"{v:.2f}", ha="center", va="center", color="white" if v > 0.6 else INK)
     ax.set_xticks(range(len(feats)))
-    ax.set_xticklabels(flab, rotation=35, ha="right", fontsize=6.5)
+    ax.set_xticklabels(flab, rotation=35, ha="right")
     ax.set_yticks(range(len(srcs)))
-    ax.set_yticklabels([FIGLAB[s] for s in srcs], fontsize=6.5)
+    ax.set_yticklabels([FIGLAB[s] for s in srcs])
     ax.grid(False)
     ax.tick_params(length=0)
     for s in ("top", "right", "left", "bottom"):
         ax.spines[s].set_visible(False)
     cb = fig.colorbar(im, ax=ax, fraction=0.025, pad=0.02)
-    cb.ax.tick_params(labelsize=6, length=0)
-    cb.set_label("ICC(2,1) vs Vicon", fontsize=6.5)
+    cb.ax.tick_params(length=0)
+    cb.set_label("ICC(2,1) vs VICON")
     cb.outline.set_visible(False)
     fig.tight_layout()
     save(fig, "kin_icc")
 
 
-def copy_e7():
-    """fig/qualitative.pdf and .png: the qualitative figure of benchmark/e7_qualitative.py."""
-    rep = BENCH / "reports" / "E7"
-    for ext in ("pdf", "png"):
-        if (rep / f"qualitative.{ext}").exists():
-            shutil.copy(rep / f"qualitative.{ext}", FIG / f"qualitative.{ext}")
+def fig_qualitative():
+    """fig/qualitative.pdf and .png: the qualitative figure of benchmark/e7_qualitative.py, drawn at \\textwidth."""
+    import e7_qualitative
+    e7_qualitative.main(figsize=(TEXTWIDTH, 4.75), fs=FS, out=FIG, name="qualitative", exts=("pdf", "png"))
 
 
 def main():
@@ -855,7 +854,7 @@ def main():
     fig_zs_ft(q1, q2, ang)
     fig_analyses(a, b, c, d)
     fig_icc(agr)
-    copy_e7()
+    fig_qualitative()
     with open(TAB / "res_macros.tex", "w") as f:
         f.write("% generated by analysis/make_results.py -- do not edit\n")
         for k, v in MACROS.items():
